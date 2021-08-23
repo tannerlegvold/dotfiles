@@ -174,18 +174,67 @@ of my versions of MenuSetup.tr and KeyEventTranslations.tr are in my google
 drive under 'mathematica stuff'. Leonid built an IDE in MMA, I should use it 
 https://mathematica.stackexchange.com/questions/114515/strategies-to-compensate-for-lack-of-multi-document-interface?rq=1.
 
-To get a Jupyter icon in my Applications menu (the thing that comes up 
-when I hit Super) I had to create a .desktop file. Specifically: 
-~/.local/share/applications/jupyter.desktop
-I had to download an icon (I forget where I downloaded it to). I also 
-had to make a script to be the thing that is executed when I select that 
-option in the menu. The scripts location is in jupyter.desktop, but I'll
-repeat it here anyways, it is ~/.local/bin/startJupyter. Thus is can 
-also be called from the terminal if you want. To install jupyter itself 
-is a process that will probably change in the future so I won't say how 
-to do it here. I have made some changes to my jupyter configuration 
-files. I made changes to: 
+... how to install Jupyter ...
+Now that Jupyter is installed, lets make a nice icon for it in the Activities view. First we must create a .desktop file in the right place
+cd ~/.local/share/applications
+touch jupyter.desktop
+Now enter jupyter.desktop and add this text
+[Desktop Entry]
+Name=Jupyter Lab
+Terminal=false
+Comment=Start Jupyter Lab
+Exec=/home/tanner/.local/bin/startJupyter
+Icon=jupyter-lab
+Type=Application
+Categories=Development;
+StartupNotify=true
+StartupWMClass=jupyter-lab
+You'll notice we referenced a script called startJupyter in there which we haven't made yet, lets make it
+cd ~/.local/bin
+touch startJupyter
+Now enter startJupyter and add this text
+#!/bin/bash
+# Checks if jupyter (server) is running, if it isn't, start it. Uses 
+# setsid --fork fo ensure the process isn't killed when the script 
+# finishes
+pgrep jupyter || setsid --fork ~/.anaconda3/bin/jupyter lab --no-browser &> /dev/null
+
+# Wait 1 second (otherwise the GUI can't find the server)
+sleep 2
+
+# Open the GUI
+# Perhaps use --kiosk for kiosk mode, whatever that is
+# For some reason the google-chrome command automatically forks itself
+# thus it doesn't need setsid --fork to work
+google-chrome --app=http://localhost:8888
+And don't forget to set permissions so it is executable
+chmod +x startJupyter
+startJupyter can also be called from the terminal if you want to start Jupyter from there.
+We also reference an icon called jupyter-lab that we haven't downloaded yet, all we must do is download it to the correct directory and the OS will take care of the rest
+cd ~/.local/share/icons
+wget ...
+You can also put it in /usr/share/icons if you want it to work for all users not just you
+I have made some changes to my jupyter configuration files. I made changes to: 
 ~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/shortcuts.jupyterlab-settings
+by setting it to this code
+{
+    "shortcuts": [
+        {
+            "command": "application:activate-next-tab",
+            "keys": [
+                "Alt ArrowRight"
+            ],
+            "selector": "body"
+        },
+        {
+            "command": "application:activate-previous-tab",
+            "keys": [
+                "Alt ArrowLeft"
+            ],
+            "selector": "body"
+        }
+    ]
+}
 To get the lsp to work I downloaded and built from source https://github.com/haskell/haskell-language-server
 Then I installed the jupyter-lsp extension using their instructions on their github page https://github.com/krassowski/jupyterlab-lsp
 Then I followed the steps at https://jupyterlab-lsp.readthedocs.io/en/latest/Configuring.html
