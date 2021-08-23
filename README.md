@@ -1,2 +1,2 @@
 # dotfiles
-My dotfiles repository
+This repo will contain `mysetup` a file with instructions on how to take stock Ubuntu with Gnome and install all the necessary programs and configure all the necessary things to get the major components of my preferred computer setup up and running. As such this repo will also contain (hopefully all) files (mostly my dotfiles, hence the name) necessary for the configuration of my system (hopefully I keep them up to date). 
