@@ -1,0 +1,187 @@
+Micro
+To install micro, we'll use this script from their website
+    curl https://getmic.ro | bash
+This sets the $EDITOR variable (nice, now we don't have to) and installs the exectuable to the current directory, lets move it to /usr/local/bin (this is where we should install binaries not intended to be managed by the system if we want all users on the system to have access to them, put it in ~/.local/bin if we only want ourselves to have access to it)
+    sudo mv micro /usr/local/bin
+To make copy/paste interact with the rest of the system we must also install xclip
+    sudo apt install xclip
+I don't have any preferred settings or plugins, if I did, this is where I'd put them.
+
+Git
+Install it (we'll also need make)
+    sudo apt install git make
+We'll need to set up authentication (following this post https://askubuntu.com/questions/773455/what-is-the-correct-way-to-use-git-with-gnome-keyring-and-https-repos/959662#959662)
+    sudo apt install libsecret-1-0 libsecret-1-dev
+    sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
+    git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+Now the next time we clone a repo, Git will save our login info and we won't need to enter ever again. On that first login, use tannerlegvold as the username and go to Github and make a new "token" (to do this, follow the instructions here https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to use as the password.
+
+Fonts
+Several things in my terminal (ranger and oh-my-bash specifically) rely on special fonts with additional icons that look cool, the Nerd Fonts (https://www.nerdfonts.com/) project handles this stuff. 
+Lets download my preferred font, Souce Code Pro (open source variations are sometimes called Sauce Code Pro for legal reasons)
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip
+You can also go to https://github.com/ryanoasis/nerd-fonts in a broswer and click on Releases then find the appropriate download link and click it. In which case the .zip will be downloaded to the ~/Downloads directory (typically), this modifies the below instructions slightly
+For a system wide installation the fonts must go in /usr/share/fonts (for a user local installation put them in ~/.local/share/fonts, make it if it doesn't already exist). Since what we downloaded is all stored as a buch of .ttf files, its best if we put it in the truetype directory specifically. We downloaded a zip so I'll use unzip to extract it to the appropriate location
+    sudo apt install unzip
+    sudo unzip SourceCodePro.zip -d /usr/share/fonts/truetype/SourceCodePro
+Then in either case we rebuild the font cache
+    sudo fc-cache -f -v
+Then delete the .zip file
+    rm SourceCodePro.zip
+Now go to the settings/preferences of your terminal emulator (I only ever use Gnome Terminal and Terminator) and tell it to use SauceCodePro Nerd Font Mono (or any of the other options)
+If you have trouble, install this package, sometimes that helps with the powerline fonts at least
+    sudo apt install fonts-powerline
+
+Ranger
+First lets install it
+    sudo apt install ranger
+Then we install the one plugin I use (if you haven't installed the fonts don't install this plugin cause it will not look right)
+    git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+Lets get ranger ready for image previews, the default method is through w3m but that only works in obscure terminal emulators, kitty doesn't work with my bash defaults, and ueberzug only works in X11... ueberzug seems like the least of three evils so we'll do that one for now. It has several dependencies, lets do those first
+    sudo apt install libxext-dev libx11-dev libxtst-dev python3-docopt python3-xlib python3-pil
+ueberzug itself is installed through pip, so lets get that
+    sudo apt install python3-pip
+Now we install ueberzug
+    pip3 install ueberzug
+For more information, see https://github.com/ranger/ranger/wiki/Image-Previews
+Ranger has four config files that should go in ~/.config/ranger but don't exist by default, we must modify two, specifically rc.conf and rifle.conf. Its best to only add the changes we want to rc.conf and let ranger use its builtin defaults for the rest
+    mkdir ~/.config/ranger
+    cd ~/.config/ranger
+    touch rc.conf
+Then enter rc.conf and add these lines (don't add the first line if you didn't install the plugin)
+    default_linemode devicons
+    set preview_images true
+    set preview_images_method ueberzug
+    set draw_borders both
+rifle.conf is different, if the user provides one then ranger ONLY uses that file and does not use any defaults, since rifle.conf is how ranger opens files of a given extension, it would be a lot of work on our part to make a file even remotely convienent, so ranger provides a command that copies a default config to the config directory which we then make minor (or major) edits to. Lets do it
+Have ranger make the default rifle.conf (it goes in ~/.config/ranger by default)
+    ranger --copy-config=rifle
+Enter rifle.conf and add this (preferably near the top for visibility reasons)
+    # Begin my edits
+    # For Mathematica stuff
+    # should I make these for .m .wl and any other MMA files (CDFs?, .tr?)
+    ext nb, flag f = mathematica -- "$1"
+    # End my edits
+See the Configuration section of the project wiki for more information (https://github.com/ranger/ranger/wiki/Official-user-guide#configuration-)
+Lastly, adding this to your .bashrc makes a ranger_cd command that leaves you in the directory you ended in in ranger (much more intuitive than the default) and binds it to Ctrl + o for convienence
+    # This is a small wrapper around ranger that puts me in the last 
+    # directory ranger was in when it closed. This works without me having
+    # to edit ranger's configs at all. Basically its ranger but more convienent
+    function ranger_cd() {
+        temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+        ranger --choosedir="$temp_file" -- "${@:-$PWD}"
+        if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+            cd -- "$chosen_dir"
+        fi
+        rm -f -- "$temp_file"
+    }
+    
+    # This binds Ctrl-O to ranger_cd
+    [[ $- == *i* ]] && bind '"\C-o":"ranger_cd\C-m"'
+    # The [[ $- == *i* ]] && is so that it only runs in interactive shells. If I 
+    # don't add this I get errors on login. I got that from https://unix.stackexchange.com/questions/26676/how-to-check-if-a-shell-is-login-interactive-batch
+     
+    # This is so that the ranger command will actually call the ranger_cd command
+    # alias ranger="ranger_cd"
+Of course, its already in mine so if you do the Bash Stuff section below (where you install my .bashrc) you won't need to add it manually
+
+Bash Stuff
+Its best if we do Oh-My-Bash and Bash Line Editor.sh (ble.sh) in one go because then both modify the .bashrc
+
+its probably easiest to make a dotfiles repo and get the .bashrc from there instead of trying to describe how to reconstruct the whole thing (I will certainly pull my mathematica configs from their Github Gist)
+I can't use gists for the files because there is no easy way to download and update them cleanly from the command line. If I make a repo then I can download them easily (the URLs are very clean) but updating will have to be done manually with a browser, thats not so bad. I'm really using Github like google drive here, so maybe I should explore that (though I feel having a revision history is kinda valuable), this is also getting into Kettelstassen territory so perhaps I should start studying the open source options for that so I pick a workflow that will play nicely with that when I get there, for now though (save for any Kettelstassen stuff) I think a dotfiles repo is the cleanest if somewhat messy solution
+
+AutoKey
+
+Chrome
+Since Chrome is not open source you can't get it in the Canonical repositories. Instead we will download the .deb from their website
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+And install it 
+    sudo dpkg -i google-chrome-stable_current_amd64.deb
+Now that its installed we don't need the .deb anymore, so lets delete it
+    rm google-chrome-stable_current_amd64.deb
+If you log in to one of your Google Accounts then all your extensions should be there automatically. Don't forget to set Chrome as the default web browser by opening Settings and going to Default Applications and setting Web to be Google Chrome.
+
+Now for Gnome
+First install gnome-tweaks if it isn't already
+    sudo apt install gnome-tweaks
+Now open it and click on Extensions, now enable extensions by clicking the slider in the upper right hand corner. Now we can start using extensions.
+Assuming your Chrome is logged into your Google Account you should already have the GNOME Shell Integration extension (if not for whatever reason, you can get it here https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) and be able to access my extension list here (https://extensions.gnome.org/local/) to turn on whatever you want. If not, heres a list of my preferred extensions, simply go to the URL and click on the slider bar to install them
+    https://extensions.gnome.org/extension/3357/material-shell/
+    https://extensions.gnome.org/extension/517/caffeine/
+    https://extensions.gnome.org/extension/4075/shell-restarter/
+    https://extensions.gnome.org/extension/906/sound-output-device-chooser/
+    https://extensions.gnome.org/extension/3499/application-volume-mixer/
+    https://extensions.gnome.org/extension/7/removable-drive-menu/
+    https://extensions.gnome.org/extension/758/no-workspace-switcher-popup/
+    https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/
+If you include Material Shell then open its settings (you can get it them through Gnome Tweaks) and change then to your liking (though hopefully Gnome saves that stuff from place to place)
+
+---------------------------------------------------------------------------------
+
+
+For Firefox, I use AutoKey to send Ctrl + PgUp when I hit Alt + Right and 
+to send Ctrl + PgDown when I hit Alt + Left. I use the Shortkeys (Custom 
+Keyboard Shortcuts) extension to stop tabs from going back or forward 
+in their history when I hit Alt + Left or Alt + Plus. To do this, set 
+alt+right to Do nothing (disable browser shortct) and alt+left to the same 
+thing. I have also set ui.key.menuAccessKeyFocuses to false in the 
+about:config menu to stop the Menu Bar Toolbar from briefly appearing every
+time I hit the Alt key. I have also unchecked Title Bar and both ToolBars in
+the Customize page.
+
+For Mathematica, I have installed these packages: Subscripts, GreekLetters, 
+RootSearch, Rubi (version 4.16.1.0), and IGraphM (version 0.5.1).
+They are installed to /home/tanner/.Mathematica/Applications and to 
+/home/tanner/.Mathematica/Paclets/Repository. 
+I have replaced the MenuSetup.tr file and the KeyEventTranslations.tr file
+in the /usr/local/Wolfram/Mathematica/12.1/SystemFiles/FrontEnd/TextResources/X 
+directory with my own. I have left the origionals there as MenuSetupOrigional.tr 
+and KeyEventTranslationsOrigional.tr. These add useful key bindings for use in 
+the notebook environment. An example is, Ctrl + Shift + [ to surround the 
+current selection (the highlighted text that is) with curly braces. Copies
+of my versions of MenuSetup.tr and KeyEventTranslations.tr are in my google
+drive under 'mathematica stuff'. Leonid built an IDE in MMA, I should use it 
+https://mathematica.stackexchange.com/questions/114515/strategies-to-compensate-for-lack-of-multi-document-interface?rq=1.
+
+To get a Jupyter icon in my Applications menu (the thing that comes up 
+when I hit Super) I had to create a .desktop file. Specifically: 
+~/.local/share/applications/jupyter.desktop
+I had to download an icon (I forget where I downloaded it to). I also 
+had to make a script to be the thing that is executed when I select that 
+option in the menu. The scripts location is in jupyter.desktop, but I'll
+repeat it here anyways, it is ~/.local/bin/startJupyter. Thus is can 
+also be called from the terminal if you want. To install jupyter itself 
+is a process that will probably change in the future so I won't say how 
+to do it here. I have made some changes to my jupyter configuration 
+files. I made changes to: 
+~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/shortcuts.jupyterlab-settings
+To get the lsp to work I downloaded and built from source https://github.com/haskell/haskell-language-server
+Then I installed the jupyter-lsp extension using their instructions on their github page https://github.com/krassowski/jupyterlab-lsp
+Then I followed the steps at https://jupyterlab-lsp.readthedocs.io/en/latest/Configuring.html
+to get the haskell-language-server working with jupyterlab. Specifically 
+I made this file
+~/.jupyter/jupyter_server_config.json
+and put this in it (you could probably put other stuff too)
+{
+    "LanguageServerManager": {
+		"language_servers": {
+			"haskell-language-server": {
+				"version": 2,
+				"argv": ["/home/tanner/.local/bin/haskell-language-server-wrapper", "--lsp"],
+				"languages": ["haskell"],
+				"mime_types": ["text/x-haskell", "text/haskell"]
+			}
+		}
+    }
+}
+to get it up and running. And now hopefully I will configure the settings 
+for the server in 
+~/.jupyter/lab/user-settings/@krassowski/jupyterlab-lsp/plugin.jupyterlab-settings
+and get something half decent working (cause right now it kinda sucks)
+
+
+
+
+
+
