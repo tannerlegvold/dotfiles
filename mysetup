@@ -208,14 +208,14 @@ sleep 2
 # thus it doesn't need setsid --fork to work
 google-chrome --app=http://localhost:8888
 And don't forget to set permissions so it is executable
-chmod +x startJupyter
+    chmod +x startJupyter
 startJupyter can also be called from the terminal if you want to start Jupyter from there.
 We also reference an icon called jupyter-lab that we haven't downloaded yet, all we must do is download it to the correct directory and the OS will take care of the rest
-cd ~/.local/share/icons
-wget ...
-You can also put it in /usr/share/icons if you want it to work for all users not just you
+    cd /usr/share/icons
+    sudo wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/jupyter-lab.svg
+You can also put it in ~/.local/share/icons if you want a user local install
 I have made some changes to my jupyter configuration files. I made changes to: 
-~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/shortcuts.jupyterlab-settings
+    ~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/shortcuts.jupyterlab-settings
 by setting it to this code
 {
     "shortcuts": [
