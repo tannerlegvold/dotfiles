@@ -8,13 +8,13 @@
 # I have moved the executable to the hidden directory .ble
 # So that is doesn't take up space in the ~ directory
 # So this code is slightly different from the code on the Github page
-[[ $- == *i* ]] && source /home/tanner/.ble/ble-0.3.2/ble.sh --noattach
+[[ $- == *i* ]] && source $HOME/.local/share/blesh/ble.sh --noattach
 # It might be possible to get similar functionality out of zsh using
 # https://stackoverflow.com/questions/5407916/zsh-zle-shift-selection
 
 # For some reason the npm executables arn't on my path. It looks like
 # this fixes the issue (hopefully)
-export PATH="/home/tanner/.npm-global/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
 
 # This is my default editor
 export EDITOR=micro
@@ -233,10 +233,9 @@ export PATH="/usr/local/Wolfram/Mathematica/12.1/Executables:$PATH"
 # Settings for oh-my-bash. 
 
 # To see a full list of what can go here thanks to oh-my-bash, 
-# see: $OSH/templates/bashrc.osh-templates which should be
-# /home/tanner/.oh-my-bash/templates/bashrc.osh-template
+# see: $OSH/templates/bashrc.osh-templates
 
-export OSH=/home/tanner/.oh-my-bash
+export OSH=$HOME/.oh-my-bash
 
 OSH_THEME="agnoster"
 
