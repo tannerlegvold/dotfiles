@@ -160,19 +160,22 @@ about:config menu to stop the Menu Bar Toolbar from briefly appearing every
 time I hit the Alt key. I have also unchecked Title Bar and both ToolBars in
 the Customize page.
 
-For Mathematica, I have installed these packages: Subscripts, GreekLetters, 
-RootSearch, Rubi (version 4.16.1.0), and IGraphM (version 0.5.1).
-They are installed to /home/tanner/.Mathematica/Applications and to 
-/home/tanner/.Mathematica/Paclets/Repository. 
-I have replaced the MenuSetup.tr file and the KeyEventTranslations.tr file
-in the /usr/local/Wolfram/Mathematica/12.1/SystemFiles/FrontEnd/TextResources/X 
-directory with my own. I have left the origionals there as MenuSetupOrigional.tr 
-and KeyEventTranslationsOrigional.tr. These add useful key bindings for use in 
-the notebook environment. An example is, Ctrl + Shift + [ to surround the 
-current selection (the highlighted text that is) with curly braces. Copies
-of my versions of MenuSetup.tr and KeyEventTranslations.tr are in my google
-drive under 'mathematica stuff'. Leonid built an IDE in MMA, I should use it 
-https://mathematica.stackexchange.com/questions/114515/strategies-to-compensate-for-lack-of-multi-document-interface?rq=1.
+I will now assume MMA is installed
+Here are some packages to consider installing
+    Rubi
+    SETools
+    SciDraw
+    MaTeX
+Typically packages are installed to either ~/.Mathematica/Applications or ~/.Mathematica/Paclets/Repository
+Ok now lets get my config files set up
+    cd ~/.Mathematica/Kernel
+    wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/init.m
+This directory may not exist at first, we'll mkdir it just to be sure
+    mkdir ~/.Mathematica/SystemFiles/FrontEnd/TextResources/X
+    cd ~/.Mathematica/SystemFiles/FrontEnd/TextResources/X
+    wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/KeyEventTranslations.tr
+    wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/MenuSetup.tr
+And I think we're all good to go
 
 ... how to install Jupyter ...
 Now that Jupyter is installed, lets make a nice icon for it in the Activities view. First we must create a .desktop file in the right place
