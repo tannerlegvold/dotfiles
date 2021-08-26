@@ -217,10 +217,11 @@ startJupyter can also be called from the terminal if you want to start Jupyter f
 We also reference an icon called jupyter-lab that we haven't downloaded yet, all we must do is download it to the correct directory and the OS will take care of the rest
     cd /usr/share/icons
     sudo wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/jupyter-lab.svg
-You can also put it in ~/.local/share/icons if you want a user local install
+You can also put it in `~/.local/share/icons` if you want a user local install
 I have made some changes to my jupyter configuration files. I made changes to: 
-    ~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/shortcuts.jupyterlab-settings
+    `~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/shortcuts.jupyterlab-settings`
 by setting it to this code
+```
 {
     "shortcuts": [
         {
@@ -239,6 +240,7 @@ by setting it to this code
         }
     ]
 }
+```
 To get the lsp to work I downloaded and built from source https://github.com/haskell/haskell-language-server
 Then I installed the jupyter-lsp extension using their instructions on their github page https://github.com/krassowski/jupyterlab-lsp
 Then I followed the steps at https://jupyterlab-lsp.readthedocs.io/en/latest/Configuring.html
@@ -246,21 +248,22 @@ to get the haskell-language-server working with jupyterlab. Specifically
 I made this file
 ~/.jupyter/jupyter_server_config.json
 and put this in it (you could probably put other stuff too)
+```
 {
     "LanguageServerManager": {
-		"language_servers": {
-			"haskell-language-server": {
-				"version": 2,
-				"argv": ["/home/tanner/.local/bin/haskell-language-server-wrapper", "--lsp"],
-				"languages": ["haskell"],
-				"mime_types": ["text/x-haskell", "text/haskell"]
-			}
-		}
+        "language_servers": {
+            "haskell-language-server": {
+                "version": 2,
+                "argv": ["/home/tanner/.local/bin/haskell-language-server-wrapper", "--lsp"],
+                "languages": ["haskell"],
+                "mime_types": ["text/x-haskell", "text/haskell"]
+            }
+        }
     }
 }
-to get it up and running. And now hopefully I will configure the settings 
-for the server in 
-~/.jupyter/lab/user-settings/@krassowski/jupyterlab-lsp/plugin.jupyterlab-settings
+```
+to get it up and running. And now hopefully I will configure the settings for the server in 
+`~/.jupyter/lab/user-settings/@krassowski/jupyterlab-lsp/plugin.jupyterlab-settings`
 and get something half decent working (cause right now it kinda sucks)
 
 
