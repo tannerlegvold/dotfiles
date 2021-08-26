@@ -145,6 +145,7 @@ Assuming your Chrome is logged into your Google Account you should already have 
     https://extensions.gnome.org/extension/7/removable-drive-menu/
     https://extensions.gnome.org/extension/758/no-workspace-switcher-popup/
     https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/
+    https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/
 If you include Material Shell then open its settings (you can get it them through Gnome Tweaks) and change then to your liking (though hopefully Gnome saves that stuff from place to place)
 
 ---------------------------------------------------------------------------------
