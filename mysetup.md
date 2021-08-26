@@ -123,6 +123,12 @@ AutoKey
 Chrome
 Make sure you've added the universe repositories, then just do this
     sudo apt install google-chrome-stable
+I don't like smooth scrolling and I don't know if Chrome saves that setting from instance to instance, to be sure it is set properly, enter
+```
+chrome://flags/#smooth-scrolling
+```
+into the address bar of Chrome and change the setting to `Disable`.
+
 Most of these instructions are uneccesary
 Since Chrome is not open source you can't get it in the Canonical repositories. Instead we will download the .deb from their website
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
