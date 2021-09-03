@@ -207,19 +207,38 @@ chrome://flags/#smooth-scrolling
 ```
 into the address bar of Chrome and change the setting to `Disable`.
 
-Most of these instructions are uneccesary
-Since Chrome is not open source you can't get it in the Canonical repositories. Instead we will download the .deb from their website
+Now lets add icons to Gnome's Application menu so we can open Chrome instances in particular profiles
 ```
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+cd ~/.local/share/Applications
+touch chrome-tanner-personal.desktop
+touch chrome-tanner-rice.desktop
+chmod +x chrome-tanner-personal.desktop
+chmod +x chrome-tanner-rice.desktop
 ```
-And install it 
+Now enter `chrome-tanner-personal.desktop` and give it this text
 ```
-sudo dpkg -i google-chrome-stable_current_amd64.deb
+[Desktop Entry]
+Name=Chrome Personal
+Terminal=false
+Comment=Open Chrome in the Tanner (Personal) profile
+Exec=/usr/bin/google-chrome-stable --new-window --profile-directory=Default
+Type=Application
+Categories=Development;
+StartupNotify=true
 ```
-Now that its installed we don't need the .deb anymore, so lets delete it
+Now enter `chrome-tanner-rice.desktop` and give it this text
 ```
-rm google-chrome-stable_current_amd64.deb
+[Desktop Entry]
+Name=Chrome Rice
+Terminal=false
+Comment=Open Chrome in the Tanner (Rice) profile
+Exec=/usr/bin/google-chrome-stable --new-window --profile-directory="Profile 1"
+Type=Application
+Categories=Development;
+StartupNotify=true
 ```
+Reload Gnome (warning if your in Wayland this will close all applications) and the icons should be in the Applications menu with the default icon (maybe I'll give them special icons in the future). 
+
 If you log in to one of your Google Accounts then all your extensions should be there automatically. Don't forget to set Chrome as the default web browser by opening Settings and going to Default Applications and setting Web to be Google Chrome.
 
 --------------------------------------------------------------------------------------------
@@ -284,6 +303,7 @@ And I think we're all good to go
 
 ## Jupyter
 ... how to install Jupyter ...
+
 Now that Jupyter is installed, lets make a nice icon for it in the Activities view. First we must create a .desktop file in the right place
 ```
 cd ~/.local/share/applications
@@ -306,6 +326,7 @@ You'll notice we referenced a script called `startJupyter` in there which we hav
 ```
 cd ~/.local/bin
 touch startJupyter
+chmod +x startJupyter
 ```
 Now enter `startJupyter` and add this text
 ```
@@ -323,10 +344,6 @@ sleep 2
 # For some reason the google-chrome command automatically forks itself
 # thus it doesn't need setsid --fork to work
 google-chrome --app=http://localhost:8888
-```
-And don't forget to set permissions so it is executable
-```
-chmod +x startJupyter
 ```
 `startJupyter` can also be called from the terminal if you want to start Jupyter from there.
 We also reference an icon called jupyter-lab that we haven't downloaded yet, all we must do is download it to the correct directory and the OS will take care of the rest
