@@ -330,7 +330,7 @@ This downloads a project that has Reanimate listed as one of it dependencies
 ```
 stack new animate github:reanimate/plain
 ```
-Reanimate and its dependencies will be downloaded if we enter the project and do something that would require the packages, like build it or start a repl (which requires building it I think)
+Reanimate and its dependencies will be downloaded if we enter the project and do something that would require a build to occur, like directly building the project or starting a repl (which requires building it I think), on my current system this takes like ten minutes
 ```
 cd animate
 cabal repl
