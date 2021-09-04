@@ -314,6 +314,10 @@ Lets also get Stack (I don't make new Haskell projects often but it is necessary
 curl -sSL https://get.haskellstack.org/ | sh
 ```
 Heres a list of (hopefully all) the libraries I have used in my projects, download what looks relevant
+HLint is a Haskell source linter that is used commonly
+```
+cabal install hlint
+```
 Reanimate (https://github.com/reanimate/reanimate)
 These give Reanimate additional capabilites
 ```
@@ -335,6 +339,7 @@ Reanimate and its dependencies will be downloaded if we enter the project and do
 cd animate
 cabal repl
 ```
+This article shows how to get a good dev setup for Haskell using VSCode https://medium.com/@dogwith1eye/setting-up-haskell-in-vs-code-with-stack-and-the-ide-engine-81d49eda3ecf
 
 ### LaTeX
 
