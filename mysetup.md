@@ -243,6 +243,35 @@ If you log in to one of your Google Accounts then all your extensions should be 
 
 --------------------------------------------------------------------------------------------
 
+To install AutoKey we will wget the .deb files from one of the recent releases (you can look for more recent releases here: https://github.com/autokey/autokey/releases)
+```
+wget https://github.com/autokey/autokey/releases/download/v0.95.10/autokey-common_0.95.10-0_all.deb
+wget https://github.com/autokey/autokey/releases/download/v0.95.10/autokey-gtk_0.95.10-0_all.deb
+```
+And now we will install them
+```
+VERSION="0.95.10-0"    # substitute with the version you downloaded
+sudo dpkg --install autokey-common_${VERSION}_all.deb autokey-gtk_${VERSION}_all.deb
+sudo apt --fix-broken install
+```
+Now we can run AutoKey from the Application menu. To get my scripts on the system do the below
+```
+cd ~/.config/autokey/data/My Phrases
+
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/.chromeTabLeft.json
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/.chromeTabRight.json
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/.firefoxTabLeft.json
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/.firefoxTabRight.json
+
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/chromeTabLeft.txt
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/chromeTabRight.txt
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/firefoxTabLeft.txt
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/firefoxTabRight.txt
+```
+This is untested however (hopefully it works).
+
+--------------------------------------------------------------------------------------------
+
 ## Gnome
 First install Gnome Tweaks if it isn't already
 ```
