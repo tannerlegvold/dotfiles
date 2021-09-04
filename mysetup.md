@@ -301,6 +301,43 @@ And I think we're all good to go
 
 --------------------------------------------------------------------------------------------
 
+## Software and libraries
+### Haskell
+First run
+```
+sudo apt install haskell-platform
+```
+this installs GHC and GHCi (along with GHC's profiler and debugger), Cabal, and a couple other tools (see https://en.wikipedia.org/wiki/Haskell_Platform).
+
+Lets also get Stack (I don't make new Haskell projects often but it is necessary to install stuff from Stackage (Hackage?) sometimes)
+```
+curl -sSL https://get.haskellstack.org/ | sh
+```
+Heres a list of (hopefully all) the libraries I have used in my projects, download what looks relevant
+Reanimate (https://github.com/reanimate/reanimate)
+These give Reanimate additional capabilites
+```
+sudo apt install ffmpeg potrace povray inkscape imagemagick
+```
+Povray also requires a particular symbolic link to exist in the home directory
+```
+cd
+sudo ln -s /etc/povray .povray
+```
+The Github page also mentions blender, which I won't bother with, and Latex which will be dealt with elsewhere in this document.
+
+This downloads a project that has Reanimate listed as one of it dependencies
+```
+stack new animate github:reanimate/plain
+```
+Reanimate and its dependencies will be downloaded if we enter the project and do something that would require the packages, like build it or start a repl (which requires building it I think)
+```
+cd animate
+cabal repl
+```
+
+--------------------------------------------------------------------------------------------
+
 ## Jupyter
 ... how to install Jupyter ...
 
