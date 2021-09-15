@@ -5,7 +5,7 @@ Currently I'm trying to move away from AutoKey for getting Alt + Left/Right to c
 
 Another outstanding issue is getting images to work with Ranger, I think I will try Kitty for this. This brings up a problem, Kitty doesn't work with my current Bash setup, if Kitty does turn out to handle images well in Wayland then I should look into bash-it, a different Bash configuration framework that may work better with Kitty than oh-my-bash. Also, look in Kitty's config files, they may have something (like something capturing certain key combos) that explains why Kitty doesn't work with ble.sh and can be disabled.
 
-Also see if you can get Activities icons (like desktop icons) that launch Chrome in a certain profile. Would be much more convinient. Also try to fix the problems with the three chrome profiles existing instead of two.
+See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
 
 --------------------------------------------------------------------------------------------
 
@@ -243,6 +243,7 @@ If you log in to one of your Google Accounts then all your extensions should be 
 
 --------------------------------------------------------------------------------------------
 
+## AutoKey
 To install AutoKey we will wget the .deb files from one of the recent releases (you can look for more recent releases here: https://github.com/autokey/autokey/releases)
 ```
 wget https://github.com/autokey/autokey/releases/download/v0.95.10/autokey-common_0.95.10-0_all.deb
@@ -269,6 +270,36 @@ wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScript
 wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/AutoKeyScripts/firefoxTabRight.txt
 ```
 This is untested however (hopefully it works).
+
+--------------------------------------------------------------------------------------------
+
+## WebCatalog
+I use this to convert websites to desktop apps. We can download the app from the website (https://webcatalog.io/webcatalog/) or directly from the Github page, for the script we'll use the latter (be careful of naming, it can change slightly depending on where the download came from), then we'll give it execution permissions and put it in a directory on the path 
+```
+cd
+wget https://github.com/webcatalog/webcatalog-app/releases/download/v37.0.0/webcatalog-37.0.0.AppImage
+chmod +x webcatalog-37.0.0.AppImage
+sudo mv webcatalog-37.0.0.AppImage /usr/local/bin
+```
+Now we'll make a .desktop file for it
+```
+cd ~/.local/share/applications
+touch webcatalog.desktop
+```
+Now enter `webcatalog.desktop` and give it this text
+```
+[Desktop Entry]
+Name=WebCatalog
+Terminal=false
+Comment=WebCatalog
+Exec=/usr/bin/webcatalog-37.0.0.AppImage
+Type=Application
+Categories=Development;
+StartupNotify=true
+```
+Reload Gnome (warning on Wayland this requires logging out which will close all applications without saving them). Now open WebCatalog from the Gnome Applications menu and navigate the GUI to install the apps you want. Right now I use it for
+* GroupMe
+Thats it: I won't bother to give it an icon right now. Some alternatives are Linux Mint's Web App Manager (https://github.com/linuxmint/webapp-manager) or opening the websites in a separate Chrome window (what we did for JupyterLab). 
 
 --------------------------------------------------------------------------------------------
 
