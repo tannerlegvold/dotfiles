@@ -17,8 +17,16 @@ See this for how to remove snap I haven't done it though, may be dangerous https
 
 --------------------------------------------------------------------------------------------
 
-sudo ## Generalflatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+## General
+This looks like something for Obsidian
+```
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub md.obsidian.Obsidian
+```
+This is the easiest way to get Discord
+```
+sudo snap install discord
+```
 Its bad to be restricted to the standard Canonical repositories, lets add universe
 ```
 sudo add-apt-repository universe
@@ -38,12 +46,23 @@ rmdir Videos Pictures Documents Music Public Templates
 
 --------------------------------------------------------------------------------------------
 
+## General Knowledge
+* The `$EDITOR` environment variable should be set to your preferred text editor, thus something like `$EDITOR=micro` should be in your bash config
+* A user should put executables in `/usr/local/bin` if they are intended to be used by all users of the system, and in `~/.local/bin` if they are only intended to be used by themselves (to be clear though, this is not where package manager programs like `apt` put their stuff)
+* Similarly, `/usr/share/fonts` is the system wide place to put fonts, `~/.local/share/fonts` is the user local one
+* Put `.desktop` files in `~/.local/share/applications`, these are files Gnome uses to make new items in the Applications menu
+* Many (most) programs these days put their config files in a directory of `~/.config`
+* On Linux, its not uncommon for rarely used directories such as `~/.local/share/fonts` to not exist on a new system, if so you'll have to make it yourself (not hard, just use `mkdir`); this may seem weird at first, but you get used to it
+* If your not sure whether to put things in their system wide or user local locations on a system only you use (like a laptop), then put them in the system wide, on the off chance you make another user or someone `ssh`s into your laptop in the future, you won't need to deal with a bunch of "this thing works on my normal user, but not for this user".
+
+--------------------------------------------------------------------------------------------
+
 ## Micro
 To install micro, we'll use this script from their website
 ```
 curl https://getmic.ro | bash
 ```
-This sets the `$EDITOR` variable (nice, now we don't have to) and installs the exectuable to the current directory, lets move it to `/usr/local/bin` (this is where we should install binaries not intended to be managed by the system if we want all users on the system to have access to them, put it in `~/.local/bin` if we only want ourselves to have access to it)
+This sets the `$EDITOR` variable (nice, now we don't have to) and places the exectuable in the current directory, lets move it to `/usr/local/bin`
 ```
 sudo mv micro /usr/local/bin
 ```
@@ -218,7 +237,7 @@ into the address bar of Chrome and change the setting to `Disable`.
 
 Now lets add icons to Gnome's Application menu so we can open Chrome instances in particular profiles
 ```
-cd ~/.local/share/Applications
+cd ~/.local/share/applications
 touch chrome-tanner-personal.desktop
 touch chrome-tanner-rice.desktop
 chmod +x chrome-tanner-personal.desktop
@@ -283,7 +302,7 @@ This is untested however (hopefully it works).
 --------------------------------------------------------------------------------------------
 
 ## WebCatalog
-I use this to convert websites to desktop apps. We can download the app from the website (https://webcatalog.io/webcatalog/) or directly from the Github page, for the script we'll use the latter (be careful of naming, it can change slightly depending on where the download came from), then we'll give it execution permissions and put it in a directory on the path 
+I use this to convert websites to desktop apps (an alternative, accessable through the command line is https://github.com/nativefier/nativefier). We can download the app from the website (https://webcatalog.io/webcatalog/) or directly from the Github page, for the script we'll use the latter (be careful of naming, it can change slightly depending on where the download came from), then we'll give it execution permissions and put it in a directory on the path 
 ```
 cd
 wget https://github.com/webcatalog/webcatalog-app/releases/download/v37.0.0/webcatalog-37.0.0.AppImage
