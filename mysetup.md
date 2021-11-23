@@ -5,7 +5,7 @@ sudo apt install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub md.obsidian.Obsidian
 ```
-It is then run using `flatpak run md.obsidian.Obsidian` I should make an icon and a command line launch script called 'obsidian' for this. I should probably use the AppImage on their site since using flatpak doesn't make this any easier. 
+It is then run using `flatpak run md.obsidian.Obsidian` I should make an icon and a command line launch script called 'obsidian' for this. I should probably use the AppImage on their site since using flatpak doesn't make this any easier. I have much more customized now. I will include this at a later date.
 
 Currently I'm trying to move away from AutoKey for getting Alt + Left/Right to change tab focus in Chrome/Firefox because it only works in X11 and I want my setup to work in Wayland (touchpad gestures baby!). I'm struggling to find a good solution, right now Hawck seems like the closest thing to a solution but we'll see.
 
@@ -14,6 +14,8 @@ As for hotkeys in the desktop, I recently found out FlyPie can simulate keypress
 Another outstanding issue is getting images to work with Ranger, I think I will try Kitty for this. This brings up a problem, Kitty doesn't work with my current Bash setup, if Kitty does turn out to handle images well in Wayland then I should look into bash-it, a different Bash configuration framework that may work better with Kitty than oh-my-bash. Also, look in Kitty's config files, they may have something (like something capturing certain key combos) that explains why Kitty doesn't work with ble.sh and can be disabled.
 
 See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
+
+I should add a section on downloading my htop config. 
 
 --------------------------------------------------------------------------------------------
 
