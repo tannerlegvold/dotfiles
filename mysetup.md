@@ -15,8 +15,6 @@ Another outstanding issue is getting images to work with Ranger, I think I will 
 
 See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
 
-I should add a section on downloading my htop config. 
-
 --------------------------------------------------------------------------------------------
 
 ## General
@@ -222,6 +220,15 @@ cd software
 rm -rf ble.sh
 cd ..
 ble-update
+```
+
+--------------------------------------------------------------------------------------------
+
+## Htop
+I have a customized `htoprc` file. It changes `htop`'s layout, colorscheme, and update delay (default is every 1.5 seconds, mine is every 0.5 seconds). All we must do is download it to the right location
+```
+cd ~/.config/htop
+wget https://raw.githubusercontent.com/tannerlegvold/dotfiles/main/htoprc
 ```
 
 --------------------------------------------------------------------------------------------
