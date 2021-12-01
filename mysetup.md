@@ -15,6 +15,8 @@ Another outstanding issue is getting images to work with Ranger, I think I will 
 
 See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
 
+See if you can configure Ranger to use [Jet](https://www.reddit.com/r/haskell/comments/r4ec10/jet_cli_structural_editor_for_json/)
+
 --------------------------------------------------------------------------------------------
 
 ## General
