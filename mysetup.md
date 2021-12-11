@@ -56,6 +56,17 @@ rmdir Videos Pictures Documents Music Public Templates
 * Many (most) programs these days put their config files in a directory of `~/.config`
 * On Linux, its not uncommon for rarely used directories such as `~/.local/share/fonts` to not exist on a new system, if so you'll have to make it yourself (not hard, just use `mkdir`); this may seem weird at first, but you get used to it
 * If your not sure whether to put things in their system wide or user local locations on a system only you use (like a laptop), then put them in the system wide, on the off chance you make another user or someone `ssh`s into your laptop in the future, you won't need to deal with a bunch of "this thing works on my normal user, but not for this user".
+* Groups 
+  * Linux has a concept of "groups": collections of users with special privledges. You can find out more with Google. Some groups of interest for this file are
+    * `input`: for keyboard hacking
+    * `uinput`: for keyboard hacking
+    * `dialout`: for Arduino
+    * `wheel`: those allowed to use `sudo` (I think), you're a member of this by default on Ubuntu so actually we don't need to worry about it
+    * maybe others I've forgotten to add here
+  * List all groups a `tanner` is a member of: `groups tanner`
+  * List all members of the `uinput` group: `getent group uinput`
+  * List all groups:  `getent group | awk -F: '{ print $1}'`
+  * Add `tanner` to the `uinput` group: `usermod -a -G uinput tanner`
 
 --------------------------------------------------------------------------------------------
 
@@ -363,15 +374,17 @@ If you include Material Shell then open its settings (you can get it them throug
 
 --------------------------------------------------------------------------------------------
 
-For Firefox, I use AutoKey to send Ctrl + PgUp when I hit Alt + Right and 
-to send Ctrl + PgDown when I hit Alt + Left. I use the Shortkeys (Custom 
-Keyboard Shortcuts) extension to stop tabs from going back or forward 
-in their history when I hit Alt + Left or Alt + Plus. To do this, set 
-alt+right to Do nothing (disable browser shortct) and alt+left to the same 
-thing. I have also set ui.key.menuAccessKeyFocuses to false in the 
-about:config menu to stop the Menu Bar Toolbar from briefly appearing every
-time I hit the Alt key. I have also unchecked Title Bar and both ToolBars in
-the Customize page.
+## Arduino
+Following [this](https://ubuntu.com/tutorials/install-the-arduino-ide#1-overview). Using the download links at the time of writing (Dec. 2021) (if they've expired just follow the tutorial and maybe update this document)
+```
+cd ~/software
+wget https://downloads.arduino.cc/arduino-1.8.16-linux64.tar.xz
+tar xvf arduino-1.8.16-linux64.tar.xz
+cd arduino-1.8.16/
+sudo ./install.sh
+cd ..
+rm arduino-1.8.16-linux64.tar.xz
+```
 
 --------------------------------------------------------------------------------------------
 
