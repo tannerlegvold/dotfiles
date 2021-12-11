@@ -62,7 +62,7 @@ rmdir Videos Pictures Documents Music Public Templates
     * `uinput`: for keyboard hacking
     * `dialout`: for Arduino
     * maybe others I've forgotten to add here
-  * List all groups a `tanner` is a member of: `groups tanner`
+  * List all groups `tanner` is a member of: `groups tanner`
   * List all members of the `uinput` group: `getent group uinput`
   * List all groups:  `getent group | awk -F: '{ print $1}'`
   * Add `tanner` to the `uinput` group: `sudo usermod -a -G uinput tanner`
@@ -82,7 +82,28 @@ To make copy/paste interact with the rest of the system we must also install xcl
 ```
 sudo apt install xclip
 ```
-I don't have any preferred settings or plugins, if I did, this is where I'd put them.
+Micro's config files are in `~/.config/micro`. Go there, open `settings.json`
+```
+cd ~/.config/micro
+micro settings.json
+```
+and set its contents to
+```
+{
+    "*.hs": {
+        "tabmovement": true,
+        "tabstospaces": true
+    },
+    "*.md": {
+        "softwrap": true,
+        "wordwrap": true
+    },
+    "*.txt": {
+        "softwrap": true,
+        "wordwrap": true
+    }
+}
+```
 
 --------------------------------------------------------------------------------------------
 
