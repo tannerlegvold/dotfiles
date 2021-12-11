@@ -15,7 +15,7 @@ Another outstanding issue is getting images to work with Ranger, I think I will 
 
 See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
 
-See if you can configure Ranger to use [Jet](https://www.reddit.com/r/haskell/comments/r4ec10/jet_cli_structural_editor_for_json/)
+See if you can configure Ranger to use [Jet](https://www.reddit.com/r/haskell/comments/r4ec10/jet_cli_structural_editor_for_json/). It already has [`jq`](https://stedolan.github.io/jq/) integration, according to the Github readme. Also consider getting it to use `bat` as a pager, and perhaps some terminal markdown viewer as the pager for markdown files.
 
 --------------------------------------------------------------------------------------------
 
@@ -369,7 +369,7 @@ StartupNotify=true
 ```
 Reload Gnome (warning on Wayland this requires logging out which will close all applications without saving them). Now open WebCatalog from the Gnome Applications menu and navigate the GUI to install the apps you want. Right now I use it for
 * GroupMe
-Thats it: I won't bother to give it an icon right now. Some alternatives are Linux Mint's Web App Manager (https://github.com/linuxmint/webapp-manager) or opening the websites in a separate Chrome window (what we did for JupyterLab). 
+Thats it: I won't bother to give it an icon right now. Some alternatives are Linux Mint's [Web App Manager](https://github.com/linuxmint/webapp-manager) or opening the websites in a separate Chrome window (what we did for JupyterLab). 
 
 --------------------------------------------------------------------------------------------
 
@@ -379,7 +379,7 @@ First install Gnome Tweaks if it isn't already
 sudo apt install gnome-tweaks
 ```
 Now open it and click on Extensions, now enable extensions by clicking the slider in the upper right hand corner. Now we can start using extensions.
-Assuming your Chrome is logged into your Google Account you should already have the GNOME Shell Integration extension (if not for whatever reason, you can get it here https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) and be able to access my extension list here (https://extensions.gnome.org/local/) to turn on whatever you want. If not, heres a list of my preferred extensions, simply go to the URL and click on the slider bar to install them
+Assuming your Chrome is logged into your Google Account you should already have the GNOME Shell Integration extension (if not for whatever reason, you can get it [here]https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) and be able to access my extension list [here](https://extensions.gnome.org/local/) to turn on whatever you want. If not, heres a list of my preferred extensions, simply go to the URL and click on the slider bar to install them
 * [Material Shell](https://extensions.gnome.org/extension/3357/material-shell/)
 * [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
 * [Shell Restarter](https://extensions.gnome.org/extension/4075/shell-restarter/)
