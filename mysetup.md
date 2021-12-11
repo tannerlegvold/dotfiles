@@ -387,6 +387,13 @@ sudo usermod -a -G dialout tanner # don't skip, this line is neccessary
 ```
 Then I had to restart, not just relog, otherwise the Arduino IDE didn't notice I was added to the `dialout` group. Note for the `usermod` line, the group you must be added to can change vary with distro, on Debian its `dialout`, on Arch supposedly its `uucp`.
 
+To set the default location sketchbooks are saved to. Make the directory
+```
+cd ~/Desktop
+mkdir arduino
+```
+Open the Arduino IDE, go to File -> Preferences, the first option is "Sketchbook location", change it to `/home/tanner/Desktop/arduino`. This can be done programmatically by opening `~/.arduino15/preferences.txt` and editing the `sketchbook.path` field (for me right now this on line 91) to be `/home/tanner/Desktop/arduino`. Its probably best to not do this while the IDE is running.
+
 --------------------------------------------------------------------------------------------
 
 ## Mathematica
