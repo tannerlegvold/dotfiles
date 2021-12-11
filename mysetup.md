@@ -61,12 +61,11 @@ rmdir Videos Pictures Documents Music Public Templates
     * `input`: for keyboard hacking
     * `uinput`: for keyboard hacking
     * `dialout`: for Arduino
-    * `wheel`: those allowed to use `sudo` (I think), you're a member of this by default on Ubuntu so actually we don't need to worry about it
     * maybe others I've forgotten to add here
   * List all groups a `tanner` is a member of: `groups tanner`
   * List all members of the `uinput` group: `getent group uinput`
   * List all groups:  `getent group | awk -F: '{ print $1}'`
-  * Add `tanner` to the `uinput` group: `usermod -a -G uinput tanner`
+  * Add `tanner` to the `uinput` group: `sudo usermod -a -G uinput tanner`
 
 --------------------------------------------------------------------------------------------
 
@@ -360,15 +359,15 @@ sudo apt install gnome-tweaks
 ```
 Now open it and click on Extensions, now enable extensions by clicking the slider in the upper right hand corner. Now we can start using extensions.
 Assuming your Chrome is logged into your Google Account you should already have the GNOME Shell Integration extension (if not for whatever reason, you can get it here https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) and be able to access my extension list here (https://extensions.gnome.org/local/) to turn on whatever you want. If not, heres a list of my preferred extensions, simply go to the URL and click on the slider bar to install them
-* https://extensions.gnome.org/extension/3357/material-shell/
-* https://extensions.gnome.org/extension/517/caffeine/
-* https://extensions.gnome.org/extension/4075/shell-restarter/
-* https://extensions.gnome.org/extension/906/sound-output-device-chooser/
-* https://extensions.gnome.org/extension/3499/application-volume-mixer/
-* https://extensions.gnome.org/extension/7/removable-drive-menu/
-* https://extensions.gnome.org/extension/758/no-workspace-switcher-popup/
-* https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/
-* https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/
+* [Material Shell](https://extensions.gnome.org/extension/3357/material-shell/)
+* [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
+* [Shell Restarter](https://extensions.gnome.org/extension/4075/shell-restarter/)
+* [Sound Output Device Chooser](https://extensions.gnome.org/extension/906/sound-output-device-chooser/)
+* [Application Volume Mixer](https://extensions.gnome.org/extension/3499/application-volume-mixer/)
+* [Removable Drive Menu](https://extensions.gnome.org/extension/7/removable-drive-menu/)
+* [No Workspace Switcher Popup](https://extensions.gnome.org/extension/758/no-workspace-switcher-popup/)
+* [Remove Audio Device Selection Dialog](https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/)
+* [Bluetooth Quick Connect](https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/)
 
 If you include Material Shell then open its settings (you can get it them through Gnome Tweaks) and change then to your liking (though hopefully Gnome saves that stuff from place to place)
 
@@ -384,7 +383,9 @@ cd arduino-1.8.16/
 sudo ./install.sh
 cd ..
 rm arduino-1.8.16-linux64.tar.xz
+sudo usermod -a -G dialout tanner
 ```
+Note for the `usermod` line, the group you must be added to can change vary with distro, on Debian its `dialout`, on Arch supposedly its `uucp`.
 
 --------------------------------------------------------------------------------------------
 
