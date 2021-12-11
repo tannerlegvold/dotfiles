@@ -383,9 +383,9 @@ cd arduino-1.8.16/
 sudo ./install.sh
 cd ..
 rm arduino-1.8.16-linux64.tar.xz
-sudo usermod -a -G dialout tanner
+sudo usermod -a -G dialout tanner # don't skip, this line is neccessary
 ```
-Note for the `usermod` line, the group you must be added to can change vary with distro, on Debian its `dialout`, on Arch supposedly its `uucp`.
+Then I had to restart, not just relog, otherwise the Arduino IDE didn't notice I was added to the `dialout` group. Note for the `usermod` line, the group you must be added to can change vary with distro, on Debian its `dialout`, on Arch supposedly its `uucp`.
 
 --------------------------------------------------------------------------------------------
 
@@ -396,6 +396,8 @@ Here are some packages to consider installing
 * SETools
 * SciDraw
 * MaTeX
+* GTPack
+* [MaXrd](https://github.com/Stianpr20/MaXrd)
 
 Typically packages are installed to either ~/.Mathematica/Applications or ~/.Mathematica/Paclets/Repository
 Ok now lets get my config files set up
