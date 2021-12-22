@@ -403,7 +403,7 @@ First install Gnome Tweaks if it isn't already
 sudo apt install gnome-tweaks
 ```
 Now open it and click on Extensions, now enable extensions by clicking the slider in the upper right hand corner. Now we can start using extensions.
-Assuming your Chrome is logged into your Google Account you should already have the GNOME Shell Integration extension (if not for whatever reason, you can get it [here]https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) and be able to access my extension list [here](https://extensions.gnome.org/local/) to turn on whatever you want. If not, heres a list of my preferred extensions, simply go to the URL and click on the slider bar to install them
+Assuming your Chrome is logged into your Google Account you should already have the GNOME Shell Integration extension (if not for whatever reason, you can get it [here](https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) and be able to access my extension list [here](https://extensions.gnome.org/local/) to turn on whatever you want. If not, heres a list of my preferred extensions, simply go to the URL and click on the slider bar to install them
 * [Material Shell](https://extensions.gnome.org/extension/3357/material-shell/)
 * [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
 * [Shell Restarter](https://extensions.gnome.org/extension/4075/shell-restarter/)
