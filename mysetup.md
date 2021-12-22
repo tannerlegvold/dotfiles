@@ -19,35 +19,6 @@ See if you can configure Ranger to use [Jet](https://www.reddit.com/r/haskell/co
 
 --------------------------------------------------------------------------------------------
 
-## General
-This looks like something for Obsidian
-```
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub md.obsidian.Obsidian
-```
-This is the easiest way to get Discord
-```
-sudo snap install discord
-```
-Its bad to be restricted to the standard Canonical repositories, lets add universe
-```
-sudo add-apt-repository universe
-```
-And lets install some basic stuff right now
-```
-sudo apt install curl python3-pip npm
-```
-I like to install source to a software directory in the home directory, so lets make one
-```
-mkdir software
-```
-I don't like all the addtional directories, lets remove them
-```
-rmdir Videos Pictures Documents Music Public Templates
-```
-
---------------------------------------------------------------------------------------------
-
 ## General Knowledge
 * The `$EDITOR` environment variable should be set to your preferred text editor, thus something like `$EDITOR=micro` should be in your bash config
 * A user should put executables in `/usr/local/bin` if they are intended to be used by all users of the system, and in `~/.local/bin` if they are only intended to be used by themselves (to be clear though, this is not where package manager programs like `apt` put their stuff)
@@ -66,6 +37,57 @@ rmdir Videos Pictures Documents Music Public Templates
   * List all members of the `uinput` group: `getent group uinput`
   * List all groups:  `getent group | awk -F: '{ print $1}'`
   * Add `tanner` to the `uinput` group: `sudo usermod -a -G uinput tanner`
+* XDG
+  * Its a Linux standard many desktop environments and programs conform to for where config files should go, where the "downloads" folder should be, etc. This [Arch wiki page](https://wiki.archlinux.org/title/XDG_user_directories) has good info (though it may be outdated)
+  * Change XDG's "downloads" directory to `~/down`: `xdg-user-dirs-update --set DOWNLOAD ~/down`
+  * According to the man page you can also set `DESKTOP`, `TEMPLATES`, `PUBLICSHARE`, `DOCUMENTS`, `MUSIC`, `PICTURES`, and `VIDEOS`
+  * Query a setting's current value: `xdg-user-dir DESKTOP`
+  * If one of the settings' directories doesn't exist (eg if you deleted it) then that setting defaults to the home directory
+
+--------------------------------------------------------------------------------------------
+
+## General
+This looks like something for Obsidian
+```
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub md.obsidian.Obsidian
+```
+This is the easiest way to get Discord
+```
+sudo snap install discord
+```
+Its bad to be restricted to the standard Canonical repositories, lets add universe
+```
+sudo add-apt-repository universe
+```
+And lets install some basic stuff right now
+```
+sudo apt install curl python3-pip npm
+```
+
+--------------------------------------------------------------------------------------------
+
+## Fixing the Home Directory
+I like to install source to a software directory in the home directory, so lets make one
+```
+cd ~
+mkdir software
+```
+Remove the directories I don't use
+```
+rmdir Videos Pictures Documents Music Public Templates
+```
+I think the names `Downloads` and `Desktop` are too long, lets switch them to `down` and `desk` (this part is still tentative)
+```
+mv Downloads down
+mv Desktop desk
+```
+Tell xdg to change the default downloads and desktop locations
+```
+xdg-user-dirs-update --set DOWNLOAD ~/down
+xdg-user-dirs-update --set DESKTOP ~/desk
+```
+Chrome does not respect the `XDG` directories. Set its download location to `/home/tanner/down` manually by navigating to `chrome://settings/downloads` and using the GUI (do this for both profiles). If you haven't downloaded Chrome yet, do this later, in the [Chrome](#chrome) section
 
 --------------------------------------------------------------------------------------------
 
@@ -310,6 +332,8 @@ StartupNotify=true
 Reload Gnome (warning if your in Wayland this will close all applications) and the icons should be in the Applications menu with the default icon (maybe I'll give them special icons in the future). 
 
 If you log in to one of your Google Accounts then all your extensions should be there automatically. Don't forget to set Chrome as the default web browser by opening Settings and going to Default Applications and setting Web to be Google Chrome.
+
+My perferred download directory is `~/down`. To set Chrome to download to there, navigate to `chrome://settings/downloads` and use the GUI. Do this for both Chrome profiles (this may only be necessary on new profiles, I don't know what Chrome does for existing profiles getting used on new machines).
 
 --------------------------------------------------------------------------------------------
 
