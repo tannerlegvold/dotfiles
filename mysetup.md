@@ -468,6 +468,35 @@ And I think we're all good to go
 
 --------------------------------------------------------------------------------------------
 
+## Virtual Machines
+Start installing a Ubuntu `.iso` cause it takes a while. Navigate to https://ubuntu.com/download/desktop and click download. Now get Virtual Box
+```
+sudo apt install virtualbox
+```
+Also, make a directory to put the vms and related items in
+```
+cd ~/desk
+mkdir vms
+```
+When VirtualBox is installed open it. Go to File -> Preferences -> General and then change Default Machine Folder to `/home/tanner/desk/vms`. Once the `.iso` is downloaded (assuming it has been downloaded to the `~/down` directory)
+```
+mv ~/down/ubuntu-20.04.3-desktop-amd64.iso ~/desk/vms
+```
+Now in Virtual Box 
+1. click New
+2. enter UbuntuTestingVM as the Name, verify Machine Folder is `/home/tanner/desk/vms`, Type is Linux, and Version is Ubuntu (64-bit), then click Next
+3. for Memory Size, use default, click Next
+4. for Hard Disk, it should default to "Create a virtual hard disk now", click Create
+5. for Hard Disk file type, it should default to VDI (VirtualBox Disk Image), click Next
+6. for Storage on physical hard disk, it should default to Dynamically allocated, click Next
+7. for File location and size, use the default file location, use the slider to change the size to 25 GB (or whatever you want), click Create
+8. Now with UbuntuTestingVM selected on the left, click Settings, click Storage, in the Storage Devices area click Empty, now in the Attributes area, next to the combobox for Optical Drive, click the little blue disk icon, navigate to the `.iso` in `~/desk/vms` and double click it, the part that used to say Empty should now say `ubuntu-20.04.3-desktop-amd64.iso`, now click Ok
+9. Now click Start, and give the VM a minute or two to start up and bring up the Install window. Once the Install window looks done loading, click Try Ubuntu, and you'll have an up and running Ubuntu Live VM.
+
+The `.iso` we downloaded was a "Live" distribution, that means its a minimal version of Ubuntu with basic utilities and a Install program which can do a full blown Ubuntu install at the press of a button. The idea is to play around in Ubuntu Live, and if you like it, run the Install program to install permanently. Ubuntu Live won't save any thing permanently, so if we download programs and edit files, after a restart all those actions will be gone. This makes it ideal for testing. So I never run the Install program. Actually VirtualBox will by default, on closing the VM, save its state, kinda like pausing it. So if you want to properly reset the VM, you must hit Discard in VirtualBox if you ever save its state.
+
+--------------------------------------------------------------------------------------------
+
 ## Software and libraries
 ### Haskell
 First run
