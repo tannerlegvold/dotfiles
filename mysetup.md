@@ -434,10 +434,10 @@ Then I had to restart, not just relog, otherwise the Arduino IDE didn't notice I
 
 To set the default location sketchbooks are saved to. Make the directory
 ```
-cd ~/Desktop
+cd ~/desk
 mkdir arduino
 ```
-Open the Arduino IDE, go to File -> Preferences, the first option is "Sketchbook location", change it to `/home/tanner/Desktop/arduino`. This can be done programmatically by opening `~/.arduino15/preferences.txt` and editing the `sketchbook.path` field (for me right now this on line 91) to be `/home/tanner/Desktop/arduino`. Its probably best to not do this while the IDE is running.
+Open the Arduino IDE, go to File -> Preferences, the first option is "Sketchbook location", change it to `/home/tanner/desk/arduino`. This can be done programmatically by opening `~/.arduino15/preferences.txt` and editing the `sketchbook.path` field (for me right now this on line 91) to be `/home/tanner/desk/arduino`. Its probably best to not do this while the IDE is running.
 
 --------------------------------------------------------------------------------------------
 
