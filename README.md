@@ -18,7 +18,7 @@ Another outstanding issue is getting images to work with Ranger, I think I will 
 
 See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
 
-See if you can configure Ranger to use [Jet](https://www.reddit.com/r/haskell/comments/r4ec10/jet_cli_structural_editor_for_json/). It already has [`jq`](https://stedolan.github.io/jq/) integration, according to the Github readme. Also consider getting it to use `bat` as a pager, and perhaps some terminal markdown viewer as the pager for markdown files.
+For ranger consider getting it to use `bat` as a pager, and perhaps some terminal markdown viewer as the pager for markdown files.
 
 --------------------------------------------------------------------------------------------
 
@@ -67,6 +67,12 @@ And lets install some basic stuff right now
 ```
 sudo apt install curl python3-pip npm
 ```
+I use a program called `fd` to search the file system, its a more modern `find`. To install
+```
+sudo apt install fd-find
+ln -s $(which fdfind) ~/.local/bin/fd
+```
+its complicated to install because the name `fd` must be symlinked to `fdfind` (the acutal name of the executable) because `fd` is taken by another program in the Ubuntu repositories.
 
 --------------------------------------------------------------------------------------------
 
@@ -129,6 +135,20 @@ and set its contents to
     }
 }
 ```
+
+--------------------------------------------------------------------------------------------
+
+## Jet
+Theres a neat little JSON editor called [Jet](https://github.com/ChrisPenner/jet). I have [my own version](https://github.com/tannerlegvold/jet) where I've changed the navigation to use arrow keys instead of the original's hjkl. To install
+```
+cd ~/software
+git clone https://github.com/tannerlegvold/jet.git
+cd jet
+stack build --copy-bins # this takes a while the first time
+```
+See the [Haskell](#haskell) section below for how to install `stack`.
+
+I should update Ranger to use this for JSON files.
 
 --------------------------------------------------------------------------------------------
 
@@ -506,7 +526,7 @@ First run
 ```
 sudo apt install haskell-platform
 ```
-this installs GHC and GHCi (along with GHC's profiler and debugger), Cabal, and a couple other tools (see https://en.wikipedia.org/wiki/Haskell_Platform).
+this installs GHC and GHCi (along with GHC's profiler and debugger), Cabal, and a couple other tools (see https://en.wikipedia.org/wiki/Haskell_Platform). By default, Cabal installs user local things to `~/.cabal/bin` (and I'm not sure Cabal even can install thing globally, perhaps by design), so make sure this is on the PATH (in my `.bashrc` it is).
 
 Lets also get Stack (I don't make new Haskell projects often but it is necessary to install stuff from Stackage (Hackage?) sometimes)
 ```
