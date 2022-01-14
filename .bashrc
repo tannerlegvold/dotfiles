@@ -1,3 +1,6 @@
+# This is a good resource for my Kettelstassen, its how to manage all
+# your dotfiles in one place https://dotfiles.github.io/
+
 # Consider adding an alias for sci hub downloads from the command line
 # https://sci-hub.se/
 # On the same topic as sci hub. https://gist.github.com/bishboria/8326b17bbd652f34566a
@@ -12,9 +15,17 @@
 # It might be possible to get similar functionality out of zsh using
 # https://stackoverflow.com/questions/5407916/zsh-zle-shift-selection
 
+# For the FullProf crystallography tool
+FULLPROF=/usr/local/bin/FullProf_Suite
+PATH=$FULLPROF:$PATH
+export FULLPROF
+
 # For some reason the npm executables arn't on my path. It looks like
 # this fixes the issue (hopefully)
 export PATH="$HOME/.npm-global/bin:$PATH"
+
+# Cabal installs user local executables to here
+export PATH="$HOME/.cabal/bin:$PATH"
 
 # This is my default editor
 export EDITOR=micro
@@ -178,7 +189,9 @@ alias sound="paplay /usr/share/sounds/sound-icons/cembalo-6.wav; paplay /usr/sha
 # This had good instructions for playing sounds from the terminal
 # https://askubuntu.com/questions/277215/how-to-make-a-sound-once-a-process-is-complete
 
-# This command fails if a name is already taken which is what we want
+# This "dissolves" a directory (moves all its contents into the 
+# outer directory, then deletes the now empty directory) the command 
+# fails if a name is already taken, which is IMO the right behavior
 function dissolve(){
         cd $1
         mv -n {./*,./.*} ..
@@ -267,6 +280,10 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# This is so directories to which other users can write don't have ugly 
+# highlighting and instead look the same as normal directories
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 # Function to find any package manually installed with 'apt install' by greping dpkg log files
 # Taken from: https://askubuntu.com/questions/21657/how-do-i-show-apt-get-package-management-history-via-command-line?noredirect=1&lq=1 
