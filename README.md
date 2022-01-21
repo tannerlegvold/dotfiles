@@ -10,10 +10,6 @@ flatpak install flathub md.obsidian.Obsidian
 ```
 It is then run using `flatpak run md.obsidian.Obsidian` I should make an icon and a command line launch script called 'obsidian' for this. I should probably use the AppImage on their site since using flatpak doesn't make this any easier. I have much more customized now. I will include this at a later date.
 
-Currently I'm trying to move away from AutoKey for getting Alt + Left/Right to change tab focus in Chrome/Firefox because it only works in X11 and I want my setup to work in Wayland (touchpad gestures baby!). I'm struggling to find a good solution, right now Hawck seems like the closest thing to a solution but we'll see.
-
-As for hotkeys in the desktop, I recently found out FlyPie can simulate keypresses. Its a Gnome extension, so it presumably does it in a very Gnomey way. Which is ideal. I should dig through the code to see if I can figure out how the author did it. Hopefully its a clean solution and will be easy for me to repurpose. 
-
 Another outstanding issue is getting images to work with Ranger, I think I will try Kitty for this. This brings up a problem, Kitty doesn't work with my current Bash setup, if Kitty does turn out to handle images well in Wayland then I should look into bash-it, a different Bash configuration framework that may work better with Kitty than oh-my-bash. Also, look in Kitty's config files, they may have something (like something capturing certain key combos) that explains why Kitty doesn't work with ble.sh and can be disabled.
 
 See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
@@ -30,16 +26,6 @@ For ranger consider getting it to use `bat` as a pager, and perhaps some termina
 * Many (most) programs these days put their config files in a directory of `~/.config`
 * On Linux, its not uncommon for rarely used directories such as `~/.local/share/fonts` to not exist on a new system, if so you'll have to make it yourself (not hard, just use `mkdir`); this may seem weird at first, but you get used to it
 * If your not sure whether to put things in their system wide or user local locations on a system only you use (like a laptop), then put them in the system wide, on the off chance you make another user or someone `ssh`s into your laptop in the future, you won't need to deal with a bunch of "this thing works on my normal user, but not for this user".
-* Groups 
-  * Linux has a concept of "groups": collections of users with special privledges. You can find out more with Google. Some groups of interest for this file are
-    * `input`: for keyboard hacking
-    * `uinput`: for keyboard hacking
-    * `dialout`: for Arduino
-    * maybe others I've forgotten to add here
-  * List all groups `tanner` is a member of: `groups tanner`
-  * List all members of the `uinput` group: `getent group uinput`
-  * List all groups:  `getent group | awk -F: '{ print $1}'`
-  * Add `tanner` to the `uinput` group: `sudo usermod -a -G uinput tanner`
 * XDG
   * Its a Linux standard many desktop environments and programs conform to for where config files should go, where the "downloads" folder should be, etc. This [Arch wiki page](https://wiki.archlinux.org/title/XDG_user_directories) has good info (though it may be outdated)
   * Change XDG's "downloads" directory to `~/down`: `xdg-user-dirs-update --set DOWNLOAD ~/down`
