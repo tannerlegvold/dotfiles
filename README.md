@@ -58,7 +58,13 @@ I use a program called `fd` to search the file system, its a more modern `find`.
 sudo apt install fd-find
 ln -s $(which fdfind) ~/.local/bin/fd
 ```
-its complicated to install because the name `fd` must be symlinked to `fdfind` (the acutal name of the executable) because `fd` is taken by another program in the Ubuntu repositories.
+its complicated to install because the name `fd` must be symlinked to `fdfind` (the acutal name of the executable) because `fd` is taken by another program in the Ubuntu repositories. Viddy is a better `watch`
+```
+wget -O viddy.tar.gz https://github.com/sachaos/viddy/releases/download/v0.3.3/viddy_0.3.3_Linux_x86_64.tar.gz
+tar xvf viddy.tar.gz
+sudo mv viddy /usr/local/bin
+rm viddy.tar.gz
+```
 
 --------------------------------------------------------------------------------------------
 
