@@ -32,6 +32,12 @@ For ranger consider getting it to use `bat` as a pager, and perhaps some termina
   * According to the man page you can also set `DESKTOP`, `TEMPLATES`, `PUBLICSHARE`, `DOCUMENTS`, `MUSIC`, `PICTURES`, and `VIDEOS`
   * Query a setting's current value: `xdg-user-dir DESKTOP`
   * If one of the settings' directories doesn't exist (eg if you deleted it) then that setting defaults to the home directory
+* When you open a terminal, it sources (executes the code in) an "initialization file" for your convienence, thus you can put commonly used aliases, functions etc in there and they will be availiable to you every time you start up a terminal. There are both global "init" files and user local ones, further there are two "kinds" of ways to run a shell, login and interactive, each have their own init files
+  * `/etc/profile` is the system-wide initialization file, executed for login shells
+  * `~/.bash_profile` is the personal initialization file, executed for login shells
+  * `~/.bashrc` is the individual per-interactive-shell startup file
+  * `~/.bash_logout` is the individual login shell cleanup file, executed when a login shell exits
+* Ubuntu uses `.profile` instead of `.bash_profile`, this confuses older programs that expect `.bash_profile` to exist. See [General](#general) for the solution.
 
 --------------------------------------------------------------------------------------------
 
