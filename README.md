@@ -65,6 +65,11 @@ tar xvf viddy.tar.gz
 sudo mv viddy /usr/local/bin
 rm viddy.tar.gz
 ```
+Historically, Unix has used `.bash_profile` for "login shells" and ".bashrc" for "interactive shells". These days, Ubuntu switched to `.profile` instead of `.bash_profile`, of course this means older programs get confused by the lack of a `.bash_profile`. The solution is simple
+```
+ln -s ~/.profile ~/.bash_profile
+```
+Execute that in the home directory, thats where all these files live.
 
 --------------------------------------------------------------------------------------------
 
