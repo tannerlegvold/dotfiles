@@ -505,7 +505,7 @@ Use `sudo docker run hello-world` to check for a proper installation. To not nee
 ```
 sudo usermod -aG docker tanner
 ```
-now log out and in for this to take effect (don't call `su - tanner` this confuses `x11docker` since it changes the environment (you may notice the bash history changes), in particular `$DISPLAY` will no longer have a value).
+now log out and in for this to take effect (don't call `su - tanner` this confuses `x11docker` since it changes the environment (you may notice the bash history changes), in particular `$DISPLAY` will no longer have a value, it will also take two Ctrl + d's to close the terminal).
 
 To deal with GUI applications I use `x11docker`
 ```
