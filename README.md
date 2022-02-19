@@ -507,7 +507,7 @@ sudo usermod -aG docker tanner
 ```
 now log out and in for this to take effect (don't call `su - tanner` this confuses `x11docker` since it changes the environment (you may notice the bash history changes), in particular `$DISPLAY` will no longer have a value, it will also take two Ctrl + d's to close the terminal).
 
-To deal with GUI applications I use `x11docker`
+To deal with GUI applications I use `x11docker` (https://github.com/mviereck/x11docker/)
 ```
 curl -fsSL https://raw.githubusercontent.com/mviereck/x11docker/master/x11docker | sudo bash -s -- --update
 sudo docker pull x11docker/xserver
