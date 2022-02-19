@@ -494,6 +494,32 @@ And I think we're all good to go
 
 --------------------------------------------------------------------------------------------
 
+## Docker
+I use Docker for KLayout since it only runs well on earlier Ubuntu versions.
+```
+sudo apt install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+Use `sudo docker run hello-world` to check for a proper installation. To not need to put `sudo` in front of every `docker` call add yourself to the `docker` group
+```
+sudo usermod -aG docker tanner
+```
+now log out and in for this to take effect (don't call `su - tanner` this confuses `x11docker` since it changes the environment (you may notice the bash history changes), in particular `$DISPLAY` will no longer have a value).
+
+To deal with GUI applications I use `x11docker`
+```
+curl -fsSL https://raw.githubusercontent.com/mviereck/x11docker/master/x11docker | sudo bash -s -- --update
+sudo docker pull x11docker/xserver
+```
+To test this install you can use some of the `x11docker` project's premade containers
+```
+sudo docker pull x11docker/xfce
+sudo x11docker x11docker/xfce xfce-terminal
+```
+
+--------------------------------------------------------------------------------------------
+
 ## Virtual Machines
 Start installing a Ubuntu `.iso` cause it takes a while. Navigate to https://ubuntu.com/download/desktop and click download. Now get Virtual Box
 ```
