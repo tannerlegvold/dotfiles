@@ -517,7 +517,7 @@ To test this install you can use some of the `x11docker` project's premade conta
 sudo docker pull x11docker/xfce
 sudo x11docker x11docker/xfce xfce-terminal
 ```
-After hunting on https://hub.docker.com/_/ubuntu?tab=tags&page=2 I found a docker image called `ubuntu:16.04`, then I wrote a barebones Dockerfile that downloads the most recent version of KLayout for Ubuntu 16.04 and installs it (after installing the dependencies apt complains about if you don't), lets make it
+After hunting on https://hub.docker.com/_/ubuntu?tab=tags&page=2 I found a docker image called `ubuntu:16.04`, then I wrote a barebones Dockerfile that downloads the most recent version of KLayout for Ubuntu 16.04 (which I found at https://www.klayout.de/build.html) and installs it (after installing the dependencies apt complains about if you don't), lets make it
 ```
 docker pull ubuntu:16:04 # doesn't hurt to do this step now
 cd ~/software
