@@ -517,6 +517,35 @@ To test this install you can use some of the `x11docker` project's premade conta
 sudo docker pull x11docker/xfce
 sudo x11docker x11docker/xfce xfce-terminal
 ```
+After hunting on https://hub.docker.com/_/ubuntu?tab=tags&page=2 I found a docker image called `ubuntu:16.04`, then I wrote a barebones Dockerfile that downloads the most recent version of KLayout for Ubuntu 16.04 and installs it (after installing the dependencies apt complains about if you don't), lets make it
+```
+docker pull ubuntu:16:04 # doesn't hurt to do this step now
+cd ~/software
+mkdir docker-klayout
+touch Dockerfile
+```
+Now open the Dockerfile text file and give it the following
+```
+FROM ubuntu:16.04
+RUN apt-get update
+RUN apt-get install -y x11-apps xterm wget
+RUN wget https://www.klayout.org/downloads/Ubuntu-16/klayout_0.27.8-1_amd64.deb
+RUN apt-get install -y libqt4-designer libqt4-xml libqt4-sql libqt4-network libqtcore4 libqtgui4 libruby2.3 python3 libpython3.5
+RUN dpkg -i /klayout_0.27.8-1_amd64.deb
+```
+Now exit the file and run
+```
+docker build -t docker-klayout .
+```
+You can now start and enter this docker container through the terminal with `docker run -it docker-klayout` or run KLayout in all its graphical glory (the point of all this) with
+```
+x11docker docker-klayout klayout
+```
+Docker images by default don't save state, its best to use `x11docker`'s `--share` option so that KLayout can affect files in our filesystem
+```
+x11docker --share ~/down docker-klayout klayout
+```
+Now in KLayout in `/home.host/down` we should see any files we put in `~/down`, similarly this is how we access anything we make in KLayout, this is now a fully functioning KLayout setup.
 
 --------------------------------------------------------------------------------------------
 
