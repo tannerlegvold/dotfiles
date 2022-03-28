@@ -546,7 +546,7 @@ x11docker docker-klayout -- klayout -e
 ```
 The `-e` is so that KLayout opens in editor mode. Docker images by default don't save state (this is why we must get the editor mode using a command line flag), its best to use `x11docker`'s `--share` option so that KLayout can affect files in our filesystem
 ```
-x11docker --share ~/desk docker-klayout klayout
+x11docker --share ~/desk docker-klayout -- klayout -e
 ```
 Now in KLayout in `/home.host/desk` we should see any files we put in `~/desk`, similarly this is how we access anything we make in KLayout, this is now a fully functioning KLayout setup.
 
