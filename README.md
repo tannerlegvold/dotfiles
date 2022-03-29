@@ -22,6 +22,7 @@ For ranger consider getting it to use `bat` as a pager, and perhaps some termina
 * The `$EDITOR` environment variable should be set to your preferred text editor, thus something like `$EDITOR=micro` should be in your bash config
 * A user should put executables in `/usr/local/bin` if they are intended to be used by all users of the system, and in `~/.local/bin` if they are only intended to be used by themselves (to be clear though, this is not where package manager programs like `apt` put their stuff)
 * Similarly, `/usr/share/fonts` is the system wide place to put fonts, `~/.local/share/fonts` is the user local one
+* Similarly, `/usr/share/icons` is the system wide place to put icons, `~/.local/share/icons` is the user local one
 * Put `.desktop` files in `~/.local/share/applications`, these are files Gnome uses to make new items in the Applications menu
 * Many (most) programs these days put their config files in a directory of `~/.config`
 * On Linux, its not uncommon for rarely used directories such as `~/.local/share/fonts` to not exist on a new system, if so you'll have to make it yourself (not hard, just use `mkdir`); this may seem weird at first, but you get used to it
@@ -80,16 +81,16 @@ Execute that in the home directory, thats where all these files live.
 --------------------------------------------------------------------------------------------
 
 ## Fixing the Home Directory
-I like to install source to a software directory in the home directory, so lets make one
+I like to install source to a `software` directory in the home directory, I also like to have a `scripts` directory
 ```
 cd ~
-mkdir software
+mkdir software scripts
 ```
-Remove the directories I don't use
+Make sure scripts on the `$PATH` (this is already done in my `.bashrc`). Remove the directories I don't use
 ```
 rmdir Videos Pictures Documents Music Public Templates
 ```
-I think the names `Downloads` and `Desktop` are too long, lets switch them to `down` and `desk` (this part is still tentative)
+I think the names `Downloads` and `Desktop` are too long, lets switch them to `down` and `desk`
 ```
 mv Downloads down
 mv Desktop desk
@@ -550,6 +551,36 @@ x11docker --share ~/desk docker-klayout -- klayout -e
 ```
 Now in KLayout in `/home.host/desk` we should see any files we put in `~/desk`, similarly this is how we access anything we make in KLayout, this is now a fully functioning KLayout setup.
 
+Lets make an Applications menu item. 
+```
+cd ~/.local/share/applications
+touch klayout.desktop
+```
+now give `klayout.desktop` this text
+```
+[Desktop Entry]
+Name=KLayout
+Terminal=false
+Comment=Start KLayout
+Exec=/home/tanner/scripts/startKLayout
+Type=Application
+Categories=Development;
+StartupNotify=true
+StartupWMClass=klayout
+```
+We referenced a script `startKLayout`, lets make it
+```
+cd ~/scripts
+touch startKLayout
+chmod +x startKLayout
+```
+Now give `startKLayout` this text
+```
+#!/bin/bash
+x11docker --share ~/desk docker-klayout -- klayout -e
+```
+There should now be a KLayout menu item (you may need to reload the session or something).
+
 --------------------------------------------------------------------------------------------
 
 ## Virtual Machines
@@ -639,7 +670,7 @@ Now enter jupyter.desktop and add this text
 Name=Jupyter Lab
 Terminal=false
 Comment=Start Jupyter Lab
-Exec=/home/tanner/.local/bin/startJupyter
+Exec=/home/tanner/scripts/startJupyter
 Icon=jupyter-lab
 Type=Application
 Categories=Development;
@@ -648,7 +679,7 @@ StartupWMClass=jupyter-lab
 ```
 You'll notice we referenced a script called `startJupyter` in there which we haven't made yet, lets make it
 ```
-cd ~/.local/bin
+cd ~/scripts
 touch startJupyter
 chmod +x startJupyter
 ```
