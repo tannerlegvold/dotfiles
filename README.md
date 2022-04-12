@@ -583,6 +583,32 @@ There should now be a KLayout menu item (you may need to reload the session or s
 
 --------------------------------------------------------------------------------------------
 
+## Bottles
+Bottles is a tool that helps install and run Windows applications on Linux using Wine. 
+```
+flatpak install flathub com.usebottles.bottles
+```
+Running using either `flatpak run com.usebottles.bottles` or using the Applications menu.
+
+### KLayout Again
+This is an alternate way to install and run KLayout using Bottles. Since this is the Windows version of KLayout its likely to be less buggy. Download the latest 64 bit Windows .exe of KLayout from its site
+```
+wget https://www.klayout.org/downloads/Windows/klayout-0.27.8-win64-install.exe
+```
+Open Bottles, click Create New Bottle or the plus in the upper left corner. Give it the name KLayoutBottle, select the Applications option, click Create and wait for completion. Now click the new bottle, click Run Executable give it the .exe we just downloaded, click through any GUI menus that appear as part of the install process. Now click the < in the upper left hand corner, click the KLayout bottle again, it should now have a Programs section with an entry named klayout_app click the play button on it. KLayout should open.
+
+To let this KLayout access our files
+```
+flatpak override --user --filesystem="/home/tanner" com.usebottles.bottles
+cd ~
+cd .var/app/com.usebottles.bottles/data/bottles/bottles
+cd KLayoutBottle/drive_c/users/tanner/
+ln -s /home/tanner truehome
+```
+In principle `truehome` should now be accessible in the bottle's filesystem. But I think it takes only the first command to get something usable for KLayout at least.
+
+--------------------------------------------------------------------------------------------
+
 ## Virtual Machines
 Start installing a Ubuntu `.iso` cause it takes a while. Navigate to https://ubuntu.com/download/desktop and click download. Now get Virtual Box
 ```
