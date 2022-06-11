@@ -20,7 +20,7 @@ For ranger consider getting it to use `bat` as a pager, and perhaps some termina
 
 ## General Knowledge
 * The `$EDITOR` environment variable should be set to your preferred text editor, thus something like `$EDITOR=micro` should be in your bash config
-* A user should put executables in `/usr/local/bin` if they are intended to be used by all users of the system, and in `~/.local/bin` if they are only intended to be used by themselves (to be clear though, this is not where package manager programs like `apt` put their stuff)
+* A user should put executables in `/usr/local/bin` if they are intended to be used by all users of the system, and in `~/.local/bin` if they are only intended to be used by themselves (nothing stops other programs from putting stuff here though, they can and will do this)
 * Similarly, `/usr/share/fonts` is the system wide place to put fonts, `~/.local/share/fonts` is the user local one
 * Similarly, `/usr/share/icons` is the system wide place to put icons, `~/.local/share/icons` is the user local one
 * Put `.desktop` files in `~/.local/share/applications`, these are files Gnome uses to make new items in the Applications menu
