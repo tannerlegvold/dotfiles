@@ -2,13 +2,7 @@
 This repo will contain `mysetup` a file with instructions on how to take stock Ubuntu with Gnome and install all the necessary programs and configure all the necessary things to get the major components of my preferred computer setup up and running. As such this repo will also contain (hopefully all) files (mostly my dotfiles, hence the name) necessary for the configuration of my system (hopefully I keep them up to date). 
 
 ## General Comments
-I want to set up a Kettelstassen, a large database of all my notes and files (organized a certain way). I would want to have great infrastructure for it since thats a bit of a big undertaking. I would want updates over time to be stored somehow (like git actually). I would want it stored securely in the cloud or on a drive and for my system to have a local copy (gotta figure out how to do this automagically), probably gotta use Google Drive or Github, Github has versioning but Google Drive has more storage and fewer restraints. Probably gonna try to organize my system using a database file of some sort and then have some sort of automatic setup for Google Drive syncing. On a related subject I found this site https://dotfiles.github.io/. It talks about all the different ways to manage dotfiles/system configuration. A favorite is naturally Home Manager with Nix. This will be an essential part of my Kettelstassen, though I have no clue how. Perhaps I should start making a list of things I will include in my KettelStassen, for starters: ~/idea, ~/Desktop/langideas, the several random idea files in my Google Drive, all my browser Favorites/Bookmarks, all my Youtube subscriptions, of course, all important files on my file system, my config files including mysetup. Maybe consider Obsidian for the Kettelstassen (theres a free version) https://obsidian.md/. I installed it like this
-```
-sudo apt install flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub md.obsidian.Obsidian
-```
-It is then run using `flatpak run md.obsidian.Obsidian` I should make an icon and a command line launch script called 'obsidian' for this. I should probably use the AppImage on their site since using flatpak doesn't make this any easier. I have much more customized now. I will include this at a later date.
+I want to set up a Kettelstassen, a large database of all my notes and files (organized a certain way). I would want to have great infrastructure for it since thats a bit of a big undertaking. I would want updates over time to be stored somehow (like git actually). I would want it stored securely in the cloud or on a drive and for my system to have a local copy (gotta figure out how to do this automagically), probably gotta use Google Drive or Github, Github has versioning but Google Drive has more storage and fewer restraints. Probably gonna try to organize my system using a database file of some sort and then have some sort of automatic setup for Google Drive syncing. On a related subject I found this site https://dotfiles.github.io/. It talks about all the different ways to manage dotfiles/system configuration. A favorite is naturally Home Manager with Nix. This will be an essential part of my Kettelstassen, though I have no clue how. Perhaps I should start making a list of things I will include in my KettelStassen, for starters: ~/idea, ~/Desktop/langideas, the several random idea files in my Google Drive, all my browser Favorites/Bookmarks, all my Youtube subscriptions, of course, all important files on my file system, my config files including mysetup. Maybe consider Obsidian for the Kettelstassen.
 
 Another outstanding issue is getting images to work with Ranger, I think I will try Kitty for this. This brings up a problem, Kitty doesn't work with my current Bash setup, if Kitty does turn out to handle images well in Wayland then I should look into bash-it, a different Bash configuration framework that may work better with Kitty than oh-my-bash. Also, look in Kitty's config files, they may have something (like something capturing certain key combos) that explains why Kitty doesn't work with ble.sh and can be disabled.
 
@@ -43,15 +37,6 @@ For ranger consider getting it to use `bat` as a pager, and perhaps some termina
 --------------------------------------------------------------------------------------------
 
 ## General
-This looks like something for Obsidian
-```
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub md.obsidian.Obsidian
-```
-This is the easiest way to get Discord
-```
-sudo snap install discord
-```
 Its bad to be restricted to the standard Canonical repositories, lets add universe
 ```
 sudo add-apt-repository universe
@@ -138,6 +123,34 @@ and set its contents to
         "wordwrap": true
     }
 }
+```
+
+--------------------------------------------------------------------------------------------
+
+## Flatpak
+Install: 
+```
+sudo apt install flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
+Some packages I use
+```
+flatpak install flathub md.obsidian.Obsidian
+flatpak install flathub im.riot.Riot
+flatpak install flathub com.discordapp.Discord
+```
+For me, the Flatpak apps I install are often also Electron apps. These run on Chrome and effectively have the smooth-scrolling flag turned on by default. I hate smooth-scrolling. Heres how to fix this. When Flatpak installs an app it makes a `.desktop` file for it in `/var/lib/flatpak/exports/share/applications`. We make our own copy of it in `.local/share/applications` not changing the name
+```
+cd ~/.local/share/applications
+cp /var/lib/flatpak/exports/share/applications/im.riot.Riot.desktop .
+```
+Now enter `im.riot.Riot.desktop` and add the `--disable-smooth-scrolling` flag to the command in the `Exec`. In the case of Riot (which is also called Element) that line became
+```
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/element --file-forwarding im.riot.Riot @@u %U @@ --disable-smooth-scrolling
+```
+Now files in `~/.local/share/applications` are supposed to override ones of the same name in `/var/lib/flatpak/exports/share/applications` but that doesn't seem to happen on my system so we must `rm` the old one
+```
+sudo rm /var/lib/flatpak/exports/share/applications/im.riot.Riot.desktop
 ```
 
 --------------------------------------------------------------------------------------------
