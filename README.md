@@ -408,7 +408,7 @@ This is untested however (hopefully it works).
 --------------------------------------------------------------------------------------------
 
 ## WebCatalog
-I use this to convert websites to desktop apps (an alternative, accessable through the command line is https://github.com/nativefier/nativefier). We can download the app from the website (https://webcatalog.io/webcatalog/) or directly from the Github page, for the script we'll use the latter (be careful of naming, it can change slightly depending on where the download came from), then we'll give it execution permissions and put it in a directory on the path 
+I use this to convert websites to desktop apps (WebCatalog only lets you make 10 apps altogether, I would also prefer it be a Flatpak but whatever, an alternative, accessable through the command line is https://github.com/nativefier/nativefier, elementaryOS has one called WebApp Manager as well). We can download the app from the website (https://webcatalog.io/webcatalog/) or directly from the Github page, for the script we'll use the latter (be careful of naming, it can change slightly depending on where the download came from), then we'll give it execution permissions and put it in a directory on the path 
 ```
 cd
 wget https://github.com/webcatalog/webcatalog-app/releases/download/v37.0.0/webcatalog-37.0.0.AppImage
