@@ -197,7 +197,7 @@ nix-env -u hello
 # Uninstall it
 nix-env -e hello
 ```
-I don't yet know if this is a per user or system wide install. You can test if `hello` is installed by running `hello`. Use https://search.nixos.org/packages to find new packages.
+I don't yet know if this is a per user or system wide install. You can test if `hello` is installed by running `hello`. See installed packages using `nix-env -q`. Use https://search.nixos.org/packages to find new packages.
 
 The `nix-shell` command can also be used to make ___reproducible executables___! Make a file named `test`, now enter it and give it
 ```
