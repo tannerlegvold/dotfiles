@@ -19,7 +19,18 @@ For ranger consider getting it to use `bat` as a pager, and perhaps some termina
 * A user should put executables in `/usr/local/bin` if they are intended to be used by all users of the system, and in `~/.local/bin` if they are only intended to be used by themselves (nothing stops other programs from putting stuff here though, they can and will do this)
 * Similarly, `/usr/share/fonts` is the system wide place to put fonts, `~/.local/share/fonts` is the user local one
 * Similarly, `/usr/share/icons` is the system wide place to put icons, `~/.local/share/icons` is the user local one
-* Put `.desktop` files in `~/.local/share/applications`, these are files Gnome uses to make new items in the Applications menu
+* Put `.desktop` files in `~/.local/share/applications`, these are files Gnome uses to make new items in the Applications menu. Here is a very minimal template `.desktop` file
+```
+[Desktop Entry]
+Name=Foo
+Exec=foo
+Icon=foo
+```
+For `Exec`, the string you give is split on spaces the first thing is then interpreted as an executable (its best to give an absolute path to the executable), and the rest (after expansion of % codes, see [this](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#exec-variables)) are fed to the executable as its arguments. The string you give to Exec will NOT be run through bash! So pipes, $HOME (or any other env var), ~ (for the home directory), or subshell expansions like $(...) or ${...} will not work. If you need to use any of these make the `Exec` line something like
+```
+Exec=/bin/bash -c "aMoreComplicated $(commandNeeding) | bashFeatures"
+```
+See [this SE post](https://askubuntu.com/questions/436891/create-a-desktop-file-that-opens-and-execute-a-command-in-a-terminal) for more inspiration. `Icon` can be a absolute file path and is optional. For more information see https://wiki.archlinux.org/title/desktop_entries.
 * Many (most) programs these days put their config files in a directory of `~/.config`
 * On Linux, its not uncommon for rarely used directories such as `~/.local/share/fonts` to not exist on a new system, if so you'll have to make it yourself (not hard, just use `mkdir`); this may seem weird at first, but you get used to it
 * If your not sure whether to put things in their system wide or user local locations on a system only you use (like a laptop), then put them in the system wide, on the off chance you make another user or someone `ssh`s into your laptop in the future, you won't need to deal with a bunch of "this thing works on my normal user, but not for this user".
