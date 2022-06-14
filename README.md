@@ -26,7 +26,7 @@ Name=Foo
 Exec=foo
 Icon=foo
 ```
-For `Exec`, the string you give is split on spaces the first thing is then interpreted as an executable (its best to give an absolute path to the executable), and the rest (after expansion of % codes, see [this](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#exec-variables)) are fed to the executable as its arguments. The string you give to Exec will NOT be run through bash! So pipes, $HOME (or any other env var), ~ (for the home directory), or subshell expansions like $(...) or ${...} will not work. If you need to use any of these make the `Exec` line something like
+For `Exec`, the string you give is split on spaces the first thing is then interpreted as an executable (its best to give an absolute path to the executable), and the rest (after expansion of % codes, see [this](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#exec-variables)) are fed to the executable as its arguments. If your `.desktop` file declares itself to be the way to open a certain file type the Gnome will use its `Exec` with any `%u`s substituted with the name of the file to be opened to open the file, this the sort of thing the % codes are for. The string you give to Exec will NOT be run through bash! So pipes, <span>$</span>HOME (or any other env var), ~ (for the home directory), or subshell expansions like <span>$</span>(...) or <span>$</span>{...} will not work. If you need to use any of these make the `Exec` line something like
 ```
 Exec=/bin/bash -c "aMoreComplicated $(commandNeeding) | bashFeatures"
 ```
