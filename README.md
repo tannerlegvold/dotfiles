@@ -4,6 +4,8 @@ This repo will contain `mysetup` a file with instructions on how to take stock U
 ## General Comments
 I want to set up a Kettelstassen, a large database of all my notes and files (organized a certain way). I would want to have great infrastructure for it since thats a bit of a big undertaking. I would want updates over time to be stored somehow (like git actually). I would want it stored securely in the cloud or on a drive and for my system to have a local copy (gotta figure out how to do this automagically), probably gotta use Google Drive or Github, Github has versioning but Google Drive has more storage and fewer restraints. Probably gonna try to organize my system using a database file of some sort and then have some sort of automatic setup for Google Drive syncing. On a related subject I found this site https://dotfiles.github.io/. It talks about all the different ways to manage dotfiles/system configuration. A favorite is naturally Home Manager with Nix. This will be an essential part of my Kettelstassen, though I have no clue how. Perhaps I should start making a list of things I will include in my KettelStassen, for starters: ~/idea, ~/Desktop/langideas, the several random idea files in my Google Drive, all my browser Favorites/Bookmarks, all my Youtube subscriptions, of course, all important files on my file system, my config files including mysetup. Maybe consider Obsidian for the Kettelstassen.
 
+Regarding autosyncing of files across computers and repos etc. [Chezmoi](https://www.chezmoi.io/) and [Syncthing](https://syncthing.net/). 
+
 Another outstanding issue is getting images to work with Ranger, I think I will try Kitty for this. This brings up a problem, Kitty doesn't work with my current Bash setup, if Kitty does turn out to handle images well in Wayland then I should look into bash-it, a different Bash configuration framework that may work better with Kitty than oh-my-bash. Also, look in Kitty's config files, they may have something (like something capturing certain key combos) that explains why Kitty doesn't work with ble.sh and can be disabled.
 
 See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
@@ -453,8 +455,9 @@ Assuming your Chrome is logged into your Google Account you should already have 
 * [No Workspace Switcher Popup](https://extensions.gnome.org/extension/758/no-workspace-switcher-popup/)
 * [Remove Audio Device Selection Dialog](https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/)
 * [Bluetooth Quick Connect](https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/)
+* [Launch new instance](https://extensions.gnome.org/extension/600/launch-new-instance/)
 
-If you include Material Shell then open its settings (you can get it them through Gnome Tweaks) and change then to your liking (though hopefully Gnome saves that stuff from place to place)
+Some of these aren't relevant if you use Material Shell (specifically `No Workspace Switcher Popup` and `Launch new instance`). If you include Material Shell then open its settings (you can get it them through Gnome Tweaks) and change them to your liking (though hopefully Gnome saves that stuff from place to place).
 
 --------------------------------------------------------------------------------------------
 
