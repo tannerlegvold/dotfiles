@@ -168,17 +168,60 @@ sudo rm /var/lib/flatpak/exports/share/applications/im.riot.Riot.desktop
 
 --------------------------------------------------------------------------------------------
 
-## Jet
-Theres a neat little JSON editor called [Jet](https://github.com/ChrisPenner/jet). I have [my own version](https://github.com/tannerlegvold/jet) where I've changed the navigation to use arrow keys instead of the original's hjkl. To install
+## Nix
+Install: following https://nixos.org/download.html execute
 ```
-cd ~/software
-git clone https://github.com/tannerlegvold/jet.git
-cd jet
-stack build --copy-bins # this takes a while the first time
+sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
-See the [Haskell](#haskell) section below for how to install `stack`.
+then stand by to answer any questions it has, I just picked defaults where I could.
 
-I should update Ranger to use this for JSON files.
+To test if the install worked we would run `nix-shell -p hello` but this collides with ble.sh (at least I think thats what its colliding with), use `--pure` to fix this. Run
+```
+nix-shell -p hello --pure
+```
+you should be dropped into a new shell where you may now execute `hello`. Exit it with Ctrl + d. Using `--pure` is kinda a messy solution since now the shell (shell environment?) we are dropped into truly has no knowledge of our system (eg we can't use `micro`). But its good enough for now.
+
+To update Nix do
+```
+nix-channel --update
+nix-env --upgrade
+```
+To install a package use `nix-env` (`-i` is short for `--install`, `-e` is short for `--uninstall`, `-u` is short for `--upgrade`)
+```
+# Install hello
+nix-env -i hello
+
+# Upgrade it
+nix-env -u hello
+
+# Uninstall it
+nix-env -e hello
+```
+I don't yet know if this is a per user or system wide install. You can test if `hello` is installed by running `hello`. Use https://search.nixos.org/packages to find new packages.
+
+The `nix-shell` command can also be used to make ___reproducible executables___! Make a file named `test`, now enter it and give it
+```
+#! /usr/bin/env nix-shell
+#! nix-shell --pure -i python -p "python38.withPackages (ps: [ ps.django ])"
+#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
+
+import django
+
+print(django)
+```
+(this example is taken from [here](https://nixos.org/guides/ad-hoc-developer-environments.html)). Now exit the file and run
+```
+chmod +x test
+./test
+```
+It should output something like
+```
+<module 'django' from '/nix/store/63rfmd76xmnm2w3pfmrskbfny1kf57s9-python3-3.8.12-env/lib/python3.8/site-packages/django/__init__.py'>
+```
+
+Cool! A one file Haskell setup would be similar. Perhaps I'll try to make this work in the future.
+
+If you execute `nix-shell` with no arguments it looks for a filed called `shell.nix` to effectively get its arguments from. One can set it up such that this is called everytime you enter a directory effectively giving the directory certain libraries and environment variables associated with it, see https://nixos.org/guides/declarative-and-reproducible-developer-environments.html#declarative-reproducible-envs.
 
 --------------------------------------------------------------------------------------------
 
@@ -292,6 +335,20 @@ function ranger_cd() {
 # alias ranger="ranger_cd"
 ```
 Of course, its already in mine so if you do the Bash Stuff section below (where you install my `.bashrc`) you won't need to add it manually
+
+--------------------------------------------------------------------------------------------
+
+## Jet
+Theres a neat little JSON editor called [Jet](https://github.com/ChrisPenner/jet). I have [my own version](https://github.com/tannerlegvold/jet) where I've changed the navigation to use arrow keys instead of the original's hjkl. To install
+```
+cd ~/software
+git clone https://github.com/tannerlegvold/jet.git
+cd jet
+stack build --copy-bins # this takes a while the first time
+```
+See the [Haskell](#haskell) section below for how to install `stack`.
+
+I should update Ranger to use this for JSON files.
 
 --------------------------------------------------------------------------------------------
 
@@ -438,10 +495,8 @@ Now enter `webcatalog.desktop` and give it this text
 [Desktop Entry]
 Name=WebCatalog
 Terminal=false
-Comment=WebCatalog
 Exec=/usr/bin/webcatalog-37.0.0.AppImage
 Type=Application
-Categories=Development;
 StartupNotify=true
 ```
 Reload Gnome (warning on Wayland this requires logging out which will close all applications without saving them). Now open WebCatalog from the Gnome Applications menu and navigate the GUI to install the apps you want. Right now I use it for
@@ -523,6 +578,8 @@ And I think we're all good to go
 --------------------------------------------------------------------------------------------
 
 ## Docker
+There is now a much easier way to install KLayout, see below.
+
 I use Docker for KLayout since it only runs well on earlier Ubuntu versions.
 ```
 sudo apt install docker.io
@@ -547,6 +604,11 @@ sudo x11docker x11docker/xfce xfce-terminal
 ```
 
 ### KLayout
+There is now a much easier way to install KLayout, assuming you have setup Nix, run
+```
+nix-env -i klayout
+```
+Done. No Docker neccessary.
 
 After hunting on https://hub.docker.com/_/ubuntu?tab=tags&page=2 I found a docker image called `ubuntu:16.04`, then I wrote a barebones Dockerfile that downloads the most recent version of KLayout for Ubuntu 16.04 (which I found at https://www.klayout.de/build.html) and installs it (after installing the dependencies apt complains about if you don't), lets make it
 ```
@@ -710,6 +772,8 @@ This article shows how to get a good dev setup for Haskell using VSCode https://
 --------------------------------------------------------------------------------------------
 
 ## Jupyter
+I never quite got IHaskell to work properly. Consider attempting to Nixify Jupyter and [IHaskell](https://github.com/IHaskell/IHaskell#nix).
+
 ... how to install Jupyter ...
 
 Now that Jupyter is installed, lets make a nice icon for it in the Activities view. First we must create a .desktop file in the right place
