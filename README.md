@@ -588,7 +588,7 @@ Done. No Docker neccessary.
 Lets make an application menu item
 ```
 cd /usr/share/icons
-wget
+sudo wget https://github.com/tannerlegvold/dotfiles/raw/main/klayoutImage.png
 cd ~/.local/share/applications
 touch klayout.desktop
 micro klayout.desktop
