@@ -609,7 +609,7 @@ There is now a much easier way to install KLayout, assuming you have setup Nix, 
 ```
 nix-env -i klayout
 ```
-Done. No Docker neccessary.
+Done. No Docker neccessary. There is also apparantly [a Flatpak](https://flathub.org/apps/details/de.klayout.KLayout).
 
 After hunting on https://hub.docker.com/_/ubuntu?tab=tags&page=2 I found a docker image called `ubuntu:16.04`, then I wrote a barebones Dockerfile that downloads the most recent version of KLayout for Ubuntu 16.04 (which I found at https://www.klayout.de/build.html) and installs it (after installing the dependencies apt complains about if you don't), lets make it
 ```
