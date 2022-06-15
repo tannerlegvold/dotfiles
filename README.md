@@ -522,6 +522,7 @@ Assuming your Chrome is logged into your Google Account you should already have 
 * [Remove Audio Device Selection Dialog](https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/)
 * [Bluetooth Quick Connect](https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/)
 * [Launch new instance](https://extensions.gnome.org/extension/600/launch-new-instance/)
+* [No Titlebar When Maximized](https://extensions.gnome.org/extension/4630/no-titlebar-when-maximized/)
 
 Some of these aren't relevant if you use Material Shell (specifically `No Workspace Switcher Popup` and `Launch new instance`). If you include Material Shell then open its settings (you can get it them through Gnome Tweaks) and change them to your liking (though hopefully Gnome saves that stuff from place to place). It may help to turn off Attach Modal Dialogs under Windows in Gnome Tweaks when using Material Shell.
 
