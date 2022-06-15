@@ -578,6 +578,35 @@ And I think we're all good to go
 
 --------------------------------------------------------------------------------------------
 
+## KLayout
+I have legacy Docker and Bottles ways of doing this, see below. There is now a much easier way to install KLayout, assuming you have setup Nix, run
+```
+nix-env -i klayout
+```
+Done. No Docker neccessary.
+
+Lets make an application menu item
+```
+cd /usr/share/icons
+wget
+cd ~/.local/share/applications
+touch klayout.desktop
+micro klayout.desktop
+```
+Give it this text
+```
+[Desktop Entry]
+Name=KLayout
+Terminal=false
+Comment=Start KLayout
+Icon=/usr/share/icons/klayoutImage.png
+Exec=klayout
+Type=Application
+```
+There is also [a Flatpak](https://flathub.org/apps/details/de.klayout.KLayout). With this you don't even need to make the application icon. But the Flatpak version repects my system dark theme which I actually don't want for KLayout so I'll stick with the Nix version for now.
+
+--------------------------------------------------------------------------------------------
+
 ## Docker
 There is now a much easier way to install KLayout, see below.
 
@@ -605,12 +634,6 @@ sudo x11docker x11docker/xfce xfce-terminal
 ```
 
 ### KLayout
-There is now a much easier way to install KLayout, assuming you have setup Nix, run
-```
-nix-env -i klayout
-```
-Done. No Docker neccessary. There is also apparantly [a Flatpak](https://flathub.org/apps/details/de.klayout.KLayout).
-
 After hunting on https://hub.docker.com/_/ubuntu?tab=tags&page=2 I found a docker image called `ubuntu:16.04`, then I wrote a barebones Dockerfile that downloads the most recent version of KLayout for Ubuntu 16.04 (which I found at https://www.klayout.de/build.html) and installs it (after installing the dependencies apt complains about if you don't), lets make it
 ```
 docker pull ubuntu:16:04 # doesn't hurt to do this step now
