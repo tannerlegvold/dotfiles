@@ -8,9 +8,18 @@ Regarding autosyncing of files across computers and repos etc. [Chezmoi](https:/
 
 Another outstanding issue is getting images to work with Ranger, I think I will try Kitty for this. This brings up a problem, Kitty doesn't work with my current Bash setup, if Kitty does turn out to handle images well in Wayland then I should look into bash-it, a different Bash configuration framework that may work better with Kitty than oh-my-bash. Also, look in Kitty's config files, they may have something (like something capturing certain key combos) that explains why Kitty doesn't work with ble.sh and can be disabled.
 
-See this for how to remove snap I haven't done it though, may be dangerous https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu/1114686#1114686.
-
 For ranger consider getting it to use `bat` as a pager, and perhaps some terminal markdown viewer as the pager for markdown files.
+
+### Nixification
+In principle its good to Nixify as much as you can. 
+
+* [NixOS](https://nixos.org/)
+* [Jupyter](https://github.com/tweag/jupyterWith), this is a big one
+* [Home Manager](https://github.com/nix-community/home-manager)
+* How much of Gnome configuration can you Nixify
+* Connection to Flatpak?
+* How much of terminal/shell/shell configuration can you Nixify. [This](https://github.com/nix-community/home-manager/blob/master/modules/programs/bash.nix) looks like a Bash config
+* What would a setup for automatic backups to an external server upon making a new system config look like? What about a small program that checks if a backup has been made today and if it hasn't it makes one to an external server. Also a button in Gnome that triggers the backup would also be nice. Precisely what folders should be included in a backup. With a nix config you greatly simplify system configuration, to the point where you may only need the home directory (and maybe one or two other obscure places) to be backed up.
 
 --------------------------------------------------------------------------------------------
 
