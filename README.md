@@ -761,7 +761,7 @@ The `.iso` we downloaded was a "Live" distribution, that means its a minimal ver
 --------------------------------------------------------------------------------------------
 
 ## Zotero
-Zotero is a bibliography/citation management and archiving tool. These install instructions worked in July 2022.
+Zotero is a bibliography/citation management and archiving tool. There is both a program that runs on your computer, an extension for your browser it integrates with, and an optional free syncing service (which you use). These install instructions worked in July 2022.
 ```
 cd ~/software
 curl --remote-name "https://download.zotero.org/client/release/6.0.10/Zotero-6.0.10_linux-x86_64.tar.bz2"
@@ -772,6 +772,8 @@ cd Zotero_linux-x86_64
 ln -s /home/tanner/software/Zotero_linux-x86_64/zotero.desktop ~/.local/share/applications/zotero.desktop
 ```
 `set_launcher_icon` modifies `zotero.desktop` to know where `Zotero_linux-x86_64` is on the file system (since thats where the icon and program are). The symlink (`ln`) must be made with an absolute file path otherwise it gets confused.
+
+Open Zotero and go to Edit -> Preferences -> Sync and enter your username and password to sync with your Zotero database.
 
 --------------------------------------------------------------------------------------------
 
